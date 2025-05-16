@@ -1,0 +1,103 @@
+{
+	"xSpawn": 2.0,
+	"ySpawn": 12.0,
+	"globalLight": 0.4,
+	"levelSound": "fireplace",
+	"npcs": {
+		"Female": {
+			"xPos": 2.0,
+			"yPos": 9.0,
+			"type": 0,
+			"dialogues": {
+				"0": "Bom dia, senhor. Precisa de algo? Acabei de tirar\no pão do forno.",
+				"1": "Desde que começaram a falar de República, meu marido\nnão dorme direito...",
+				"2": "As roupas não secam com essa chuva. Vai ver até\no céu tá triste com o que vem aí.",
+				"3": "Falam que o Imperador está velho... Mas será que a\nRepública vai por comida na nossa mesa?",
+				"4": "Me disseram que os soldados marcharam pela rua\nhoje cedo. Será que vai ter guerra?",
+				"5": "Eu só queria que meus filhos tivessem uma vida\ntranquila... Mas o mundo anda tão agitado.",
+				"6": "Minha avó dizia que quando o galo canta sem parar,\nalgo grande está pra acontecer.",
+				"7": "Não confio nesses políticos da capital. Pelo menos\nDom Pedro sempre manteve a ordem."
+			}
+		}
+	},
+	"furniture": {
+		"Bed": {
+			"xPos": 1.0,
+			"yPos": 10.0
+		},
+		"Desk": {
+			"type": "east",
+			"xPos": 1.0,
+			"yPos": 12.0
+		},
+		"Desk": {
+			"type": "east",
+			"xPos": 1.0,
+			"yPos": 9.0
+		},
+		"Lamp": {
+			"xPos": 1.0,
+			"yPos": 9.8
+		},
+		"Lamp": {
+			"xPos": 1.0,
+			"yPos": 12.8
+		},
+		"Carpet": {
+			"type": "large",
+			"xPos": 2.0,
+			"yPos": 9.0
+		},
+		"Table": {
+			"type": "glass",
+			"xPos": 11.5,
+			"yPos": 9.5
+		},
+		"Wardrobe": {
+			"xPos": 6.5,
+			"yPos": 14.5
+		},
+		"Wardrobe": {
+			"xPos": 8.5,
+			"yPos": 14.5
+		},
+		"Drawer": {
+			"xPos": 1.0,
+			"yPos": 14.5
+		},
+		"Drawer": {
+			"xPos": 2.1,
+			"yPos": 14.5
+		},
+		"Drawer": {
+			"xPos": 3.2,
+			"yPos": 14.5
+		},
+		"Drawer": {
+			"xPos": 4.3,
+			"yPos": 14.5
+		},
+		"Fireplace": {
+			"xPos": 11.5,
+			"yPos": 14.5
+		},
+				
+	},
+	"entities": {
+		"Event": {
+			"xPos": 7.0,
+			"yPos": 5.5,
+			"levelName": "palacecutscene",
+			"xSpawn": 21.5,
+			"ySpawn": 50.5
+		},
+		"Event": {
+			"xPos": 8.0,
+			"yPos": 5.5,
+			"levelName": "palacecutscene",
+			"xSpawn": 21.5,
+			"ySpawn": 50.5
+		}
+	}
+	
+}

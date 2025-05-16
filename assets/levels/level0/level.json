@@ -1,0 +1,63 @@
+{
+	"xSpawn": 16.0,
+	"ySpawn": 50.0,
+	"globalLight": 0.4,
+	"houses": {
+		"0": {
+			"xPos": 8.5,
+			"yPos": 52.0,
+			"levelToGo": "house0",
+			"type": 0
+		},
+		"1": {
+			"xPos": 21.5,
+			"yPos": 52.0,
+			"levelToGo": "house1",
+			"type": 0
+		},
+		"2": {
+			"xPos": 34.5,
+			"yPos": 52.0,
+			"levelToGo": "house2",
+			"type": 0
+		}
+	},
+	"entities": {
+		"Lamp Post": {
+			"xPos": 17.5,
+			"yPos": 48.5,
+		},
+		"Lamp Post": {
+			"xPos": 26.5,
+			"yPos": 48.5,
+		},
+		"Firefly": {
+			"xPos": 24.5,
+			"yPos": 49.5,
+		},
+		"Firefly": {
+			"xPos": 28.5,
+			"yPos": 49.5,
+		},
+		"Firefly": {
+			"xPos": 26.5,
+			"yPos": 50.5,
+		},
+		"Firefly": {
+			"xPos": 27.0,
+			"yPos": 48.5,
+		},
+		"Firefly": {
+			"xPos": 5.0,
+			"yPos": 58.0,
+		},
+		"Firefly": {
+			"xPos": 6.0,
+			"yPos": 58.5,
+		},
+		"Firefly": {
+			"xPos": 5.5,
+			"yPos": 56.5,
+		},
+	}
+}

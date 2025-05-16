@@ -1,0 +1,56 @@
+{
+	"direction": "up",
+	"xSpawn": 15.5,
+	"ySpawn": 15,
+	"globalLight": 0.3,
+	"levelSound": "birds_ambiance",
+	"canMove": false,
+	"entities": {  
+		"Barrack Entrance": {
+			"xPos": 16.35,
+			"yPos": 20.0,
+		},
+		"Lamp Post": {
+			"xPos": 17.3,
+			"yPos": 16.5,
+			"direction": "vertical"
+		},
+		"Lamp Post": {
+			"xPos": 13.3,
+			"yPos": 16.5,
+			"direction": "vertical"
+		},
+		"Firefly": {
+			"xPos": 17.5,
+			"yPos": 17.0,
+		},
+		"Firefly": {
+			"xPos": 18.5,
+			"yPos": 18.5,
+		},
+		"Firefly": {
+			"xPos": 16.5,
+			"yPos": 18.0,
+		}
+	},
+	"npcs": {
+		"Male": {
+			"xPos": 15.5,
+			"yPos": 18.0,
+			"xtPos": 15.5,
+			"ytPos": 15.0,
+			"type": 3,
+			"dialogues": {
+				"0": "Olá Marechal, o que te traz aqui hoje?",
+				"1": {
+					"text": "Podemos fazer algo por você?",
+					"options": {
+						"Reúnir todos os soldados na\nfrente do quartel": {
+							"levelName": "barracks2"
+						},
+					}
+				}	
+			}
+		},
+	}
+}

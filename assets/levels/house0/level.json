@@ -1,0 +1,68 @@
+{
+	"xSpawn": 6.0,
+	"ySpawn": 1.5,
+	"levelSound": "fireplace",
+	"globalLight": 0.4,
+	"furniture": {
+		"Carpet": {
+			"xPos": 2.0,
+			"yPos": 3.0
+		},
+		"Bed": {
+			"xPos": 1.0,
+			"yPos": 3.5
+		},
+		"Desk": {
+			"xPos": 1.0,
+			"yPos": 5.5,
+			"type": "east"
+		},
+		"Desk": {
+			"xPos": 1.0,
+			"yPos": 2.5,
+			"type": "east"
+		},
+		"Lamp": {
+			"xPos": 1.0,
+			"yPos": 6.3
+		},
+		"Lamp": {
+			"xPos": 1.0,
+			"yPos": 3.3
+		},
+		"Table": {
+			"xPos": 8.5,
+			"yPos": 3.0
+		},
+		"Desk": {
+			"type": "large",
+			"xPos": 5.5,
+			"yPos": 6.5
+		},
+		"Fireplace": {
+			"xPos": 8.0,
+			"yPos": 6.5
+		}
+	},
+	"entities": {
+		"Event": {
+			"xPos": 6.0,
+			"yPos": 0.5,
+			"levelName": "level0",
+			"xSpawn": 21.5,
+			"ySpawn": 50.5
+		}
+	},
+    "npcs": {
+		"Female": {
+			"type": 1,			
+			"xPos": 5.0,
+			"yPos": 3.0,
+			"dialogues": [
+				"Por que você está aqui?\nNão deveria estar em outro lugar?",
+				"Eu te vi chegando... o que você quer?",
+				"Sério, você ainda está por aqui?\nNão tem mais nada para fazer?"
+			]
+        },
+    }
+  }

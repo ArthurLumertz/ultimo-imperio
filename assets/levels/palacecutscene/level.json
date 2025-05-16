@@ -1,0 +1,64 @@
+{
+	"xSpawn": 21.5,
+	"ySpawn": 50.5,
+	"globalLight": 0.7,
+	"canMove": false,
+	"npcs": {
+		"Male": {
+			"xPos": 21.5,
+			"yPos": 47.5,
+			"xtPos": 21.5,
+			"ytPos": 49.5,
+			"dialogues": {
+				"0": "Bom dia senhor, eu fiquei sabendo que\nDom Pedro será deposto.",
+				
+				"1": {
+					"text": "Você pode me dizer se\nessa informação é verídica?",
+					"options": {						
+						"Falar a verdade": {
+							"dialogue": "Sim, nós no exército já estamos\ntrabalhando para que isso seja\nrealizado o quanto antes.",
+							"response": "Que ótima notícia, senhor!\nSaiba que o povo apoia o\nseu julgamento veementemente!",
+							"emotionChange": "happy"
+						},
+						"Mentir": {
+							"dialogue": "Não, eu jamais faria isso com nosso\namado governante, volte para o buraco\nde onde você veio, seu traidor imundo!",
+							"response": "Eu devia ter adivinhado, todos vocês\nno poder são exatamente iguais;\ncriaturas gananciosas que ofereceriam\nseu povo como oferenda ao diabo em\ntroca de alguns trocados. Enfim, tomara\nque você morra dolorosamente servindo\no seu \"amado governante\", escória.",
+							"emotionChange": "angry"
+						}
+					}
+				},
+			},
+			"levelName": "barracks"
+		}
+	},
+	"houses": {
+		"0": {
+			"xPos": 8.5,
+			"yPos": 52.0,
+			"levelToGo": "house0",
+			"type": 0
+		},
+		"1": {
+			"xPos": 21.5,
+			"yPos": 52.0,
+			"levelToGo": "house1",
+			"type": 0
+		},
+		"2": {
+			"xPos": 34.5,
+			"yPos": 52.0,
+			"levelToGo": "house2",
+			"type": 0
+		}
+	},
+	"entities": {
+		"Lamp Post": {
+			"xPos": 17.5,
+			"yPos": 48.5,
+		},
+		"Lamp Post": {
+			"xPos": 26.5,
+			"yPos": 48.5,
+		},
+	}
+}

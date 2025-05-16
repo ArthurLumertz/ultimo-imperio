@@ -1,0 +1,101 @@
+{
+	"direction": "up",
+	"xSpawn": 15.5,
+	"ySpawn": 15,
+	"globalLight": 0.3,
+	"levelSound": "birds_ambiance",
+	"canMove": false,
+	"entities": {  
+		"Barrack Entrance": {
+			"xPos": 16.35,
+			"yPos": 20.0,
+		},
+		"Lamp Post": {
+			"xPos": 17.3,
+			"yPos": 16.5,
+			"direction": "vertical"
+		},
+		"Lamp Post": {
+			"xPos": 13.3,
+			"yPos": 16.5,
+			"direction": "vertical"
+		},
+		"Firefly": {
+			"xPos": 17.5,
+			"yPos": 17.0,
+		},
+		"Firefly": {
+			"xPos": 18.5,
+			"yPos": 18.5,
+		},
+		"Firefly": {
+			"xPos": 16.5,
+			"yPos": 18.0,
+		}
+	},
+	"dialogues": [
+		"Eu tenho certeza que todos vocês aqui\npresentes sabem da importância do exército\npara o povo brasileiro",
+		"Assim como vocês sabem que Dom Pedro II\né um ótimo governante, porém está\nclaro para todos que o atual governo",
+		"Não está dando a devida atenção à nós, que\nnos esforçamos tanto para proteger as\nnossas os cidadãos deste país.",
+		"Além disso, o que é um país em que as\npessoas que moram nele não tem poder nenhum\npara interferir nas decisões tomadas?!",
+		"Esse país precisa de uma reforma,\ne essa reforma começa HOJE!"
+	],
+	"dialogueFinishLevel": "bossfight",
+	"entities": {
+		"Barrack Entrance": {
+			"xPos": 16.0,
+			"yPos": 20.0,
+		}
+	},
+	"npcs": {
+		"Male": {
+			"xPos": 16.0,
+			"yPos": 17.0,
+			"canMove": false,
+			"direction": "down",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 12.0,
+			"yPos": 16.0,
+			"canMove": false,
+			"direction": "right",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 12.0,
+			"yPos": 14.5,
+			"canMove": false,
+			"direction": "right",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 12.0,
+			"yPos": 17.5,
+			"canMove": false,
+			"direction": "right",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 19.0,
+			"yPos": 16.0,
+			"canMove": false,
+			"direction": "left",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 19.0,
+			"yPos": 14.5,
+			"canMove": false,
+			"direction": "left",
+			"type": 3
+		},
+		"Male": {
+			"xPos": 19.0,
+			"yPos": 17.5,
+			"canMove": false,
+			"direction": "left",
+			"type": 3
+		},
+	}
+}
