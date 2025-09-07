@@ -54,8 +54,8 @@ public class TheLastEmpire extends Game {
 		sceneManager = new SceneManager(this);
 		audioManager = new AudioManager();
 
-		setGuiScreen(new GuiMainMenu(), false);
-//		load();
+		setGuiScreen(null, false);
+		load();
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class EntityFurniture extends Entity {
 		super(level);
 		setSize(width, height);
 		setPos(x, y);
-		if (texture != null) {			
+		if (texture != null) {
 			this.texture = new TextureRegion(
 					Graphics.instance.getFurniture(texture.x, texture.y, texture.width, texture.height));
 		}
@@ -47,7 +47,7 @@ public class EntityFurniture extends Entity {
 		float x = data.getFloat("xPos");
 		float y = data.getFloat("yPos");
 		String type = data.getString("type", null);
-		
+
 		switch (name) {
 		case "Table":
 			type = Objects.requireNonNullElse(type, "default");
@@ -69,6 +69,9 @@ public class EntityFurniture extends Entity {
 			return new BookshelfFurniture(level, x, y);
 		case "Fireplace":
 			return new FireplaceFurniture(level, x, y);
+        case "Chair":
+            type = Objects.requireNonNullElse(type, "south");
+            return new ChairFurniture(level, x, y, type);
 		default:
 			throw new RuntimeException("Failed to find entity: " + name);
 		}

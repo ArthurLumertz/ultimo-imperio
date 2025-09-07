@@ -81,8 +81,22 @@
 			"xPos": 11.5,
 			"yPos": 14.5
 		},
-				
+        "Chair": {
+          "xPos": 12.3,
+          "yPos": 9.4,
+          "type": "north"
+        }
 	},
+    "decorations": {
+      "Book": {
+        "xPos": 11.8,
+        "yPos": 10.5
+      },
+      "Mug": {
+        "xPos": 12.45,
+        "yPos": 10.7
+      }
+    },
 	"entities": {
 		"Event": {
 			"xPos": 7.0,
@@ -99,5 +113,5 @@
 			"ySpawn": 50.5
 		}
 	}
-	
+
 }

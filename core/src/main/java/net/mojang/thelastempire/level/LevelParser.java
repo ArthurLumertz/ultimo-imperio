@@ -46,8 +46,8 @@ public class LevelParser {
 				byte value = Byte.parseByte(rawValue);
 
 				if (value == Tile.grass.getId()) {
-					level.setData(x, y, MathUtils.random(1, 4));
-				}
+                    level.setData(x, y, MathUtils.random(1, 4));
+                }
 				level.setTile(x, h - y - 1, value);
 			}
 		}
@@ -273,7 +273,7 @@ public class LevelParser {
 	public String getCurrentLevel() {
 		return currentLevel;
 	}
-	
+
 	public void stopMusic() {
 		if (levelSound != null) {
 			TheLastEmpire.getTheLastEmpire().stopMusic(levelSound);

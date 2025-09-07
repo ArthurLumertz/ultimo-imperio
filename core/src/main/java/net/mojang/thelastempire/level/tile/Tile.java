@@ -18,7 +18,7 @@ public class Tile {
 			.setIcon(6, 1);
 	public static final Tile tree = new TreeTile(4, Material.woodSolid).setSoundType(SoundType.WOOD).setName("Tree");
 	public static final Tile woodFloor = new WoodTile(5, Material.wood).setSoundType(SoundType.WOOD).setName("Wood")
-			.setIcon(7, 1);
+			.setIcon(11, 0);
 	public static final Tile border = new BorderTile(6, Material.rockSolid).setName("Border");
 	public static final Tile woodFence = new FenceTile(7, Material.woodSolid).setName("Wooden Fence");
 	public static final Tile stoneFloor = new Tile(8, Material.rock).setName("Stone Tile").setIcon(8, 1);
