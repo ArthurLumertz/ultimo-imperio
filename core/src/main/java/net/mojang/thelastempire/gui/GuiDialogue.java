@@ -94,8 +94,11 @@ public class GuiDialogue extends GuiScreen {
 	}
 
 	private void handleOptionInput() {
-		if (!inOptionSelection || optionKeys.size == 0)
-			return;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+			skipDialogue();
+		}
+		
+		if (!inOptionSelection || optionKeys.size == 0) return;
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 			selectedOption = (selectedOption - 1 + optionKeys.size) % optionKeys.size;
@@ -144,7 +147,7 @@ public class GuiDialogue extends GuiScreen {
 				optionHandled = false;
 			} else {
 				if (npc != null) {
-					npc.endChatting();
+					npc.endChatting(true);
 				}
 				TheLastEmpire.getTheLastEmpire().setGuiScreen(null, false);
 				if (onDialogueFinish != null) {
@@ -214,6 +217,11 @@ public class GuiDialogue extends GuiScreen {
 			
 			oy -= g.getFontSize() * 1.5f;
 		}
+	}
+	
+	private void skipDialogue() {
+		theLastEmpire.setGuiScreen(null, false);
+		npc.endChatting(false);
 	}
 
 	private void handleOptionSelection() {

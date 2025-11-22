@@ -285,8 +285,8 @@ public class NPC extends Mob {
 		TheLastEmpire.getTheLastEmpire().setGuiScreen(guiDialogue, false);
 	}
 
-	public void endChatting() {
-		if (levelName != null) {
+	public void endChatting(boolean shouldLoadLevel) {
+		if (levelName != null && shouldLoadLevel) {
 			level.loadLevel(levelName, true, false);
 			return;
 		}
