@@ -61,7 +61,7 @@ public class GuiIntro extends GuiScreen {
 		music.stop();
 
 		theLastEmpire.setGuiScreen(null, true);
-		theLastEmpire.load();
+		theLastEmpire.load("palace");
 	}
 
 }

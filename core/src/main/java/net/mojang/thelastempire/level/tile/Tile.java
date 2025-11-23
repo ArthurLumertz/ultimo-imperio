@@ -22,6 +22,7 @@ public class Tile {
 	public static final Tile border = new BorderTile(6, Material.rockSolid).setName("Border");
 	public static final Tile woodFence = new FenceTile(7, Material.woodSolid).setName("Wooden Fence");
 	public static final Tile stoneFloor = new Tile(8, Material.rock).setName("Stone Tile").setIcon(8, 1);
+	public static final Tile path = new PathTile(9, Material.earth).setName("Path").setIcon(7, 1);
 
 	protected byte id;
 	private String name;

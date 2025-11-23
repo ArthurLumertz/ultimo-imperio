@@ -26,7 +26,7 @@ import net.mojang.thelastempire.math.Vec2;
 public class Player extends Mob {
 
 	private static Texture player = Resources.getTexture("char");
-	
+
 	private Inventory inventory = new Inventory(4);
 	private PlayerController controller = new PlayerController(this);
 
@@ -38,18 +38,21 @@ public class Player extends Mob {
 	private static final int LEFT_ANIMATION = 2;
 	private static final int RIGHT_ANIMATION = 3;
 
+	private static final int UP_IDLE_ANIMATION = 4;
+	private static final int DOWN_IDLE_ANIMATION = 5;
+
 	protected Animation<TextureRegion> currentAnimation;
 	protected Animation<TextureRegion>[] allAnimations;
 
 	private float animationTimer = 0f;
-	private boolean canMove = false;
+	public boolean canMove = false;
 
 	private Array<String> dialogues = new Array<String>();
 	private String dialogueFinishLevel;
-	
+
 	private Light light = null;
 	protected boolean isDashing = false;
-
+	
 	public Player(Level level, float xs, float ys, boolean canMove, String direction) {
 		super(level, 20);
 
@@ -66,7 +69,7 @@ public class Player extends Mob {
 			light = new Light(x, y, 0.5f, 0.1f, 4f, new Color(1f, 0.9f, 0f, 1f));
 			Graphics.instance.setLight(light);
 		}
-		
+
 		createAnimation(player);
 	}
 
@@ -81,14 +84,22 @@ public class Player extends Mob {
 		TextureRegion[] rightFrames = new TextureRegion[] { new TextureRegion(texture, 0, 64, 16, 32),
 				new TextureRegion(texture, 16, 64, 16, 32), };
 
-		allAnimations = (Animation<TextureRegion>[]) new Animation<?>[4];
+		TextureRegion[] upIdleFrames = new TextureRegion[] { new TextureRegion(texture, 0, 32, 16, 32),
+				new TextureRegion(texture, 16, 32, 16, 32), };
+		TextureRegion[] downIdleFrames = new TextureRegion[] { new TextureRegion(texture, 0, 0, 16, 32),
+				new TextureRegion(texture, 16, 0, 16, 32), };
+
+		allAnimations = (Animation<TextureRegion>[]) new Animation<?>[6];
 		allAnimations[UP_ANIMATION] = new Animation<TextureRegion>(0.3f, upFrames);
 		allAnimations[DOWN_ANIMATION] = new Animation<TextureRegion>(0.3f, downFrames);
 		allAnimations[LEFT_ANIMATION] = new Animation<TextureRegion>(0.3f, leftFrames);
 		allAnimations[RIGHT_ANIMATION] = new Animation<TextureRegion>(0.3f, rightFrames);
+		
+		allAnimations[UP_IDLE_ANIMATION] = new Animation<TextureRegion>(0.8f, upIdleFrames);
+		allAnimations[DOWN_IDLE_ANIMATION] = new Animation<TextureRegion>(0.8f, downIdleFrames);
 
-		currentAnimation = allAnimations[direction.equals("up") ? UP_ANIMATION
-				: direction.equals("down") ? DOWN_ANIMATION
+		currentAnimation = allAnimations[direction.equals("up") ? UP_IDLE_ANIMATION
+				: direction.equals("down") ? DOWN_IDLE_ANIMATION
 						: direction.equals("left") ? LEFT_ANIMATION : RIGHT_ANIMATION];
 	}
 
@@ -96,7 +107,7 @@ public class Player extends Mob {
 	public void tick() {
 		xo = x;
 		yo = y;
-		
+
 		GuiScreen guiScreen = TheLastEmpire.getTheLastEmpire().getSceneManager().getScreen();
 		boolean shouldBreak = false;
 		if (guiScreen != null) {
@@ -105,27 +116,30 @@ public class Player extends Mob {
 				shouldBreak = false;
 			}
 		}
-		if (shouldBreak) return;
-		
+		if (shouldBreak)
+			return;
+
 		baseTick(xd, yd);
 		xd *= 0.71f;
 		yd *= 0.71f;
 
-		switch (direction) {
-		case "up":
-			currentAnimation = allAnimations[UP_ANIMATION];
-			break;
-		case "down":
-			currentAnimation = allAnimations[DOWN_ANIMATION];
-			break;
-		case "left":
-			currentAnimation = allAnimations[LEFT_ANIMATION];
-			break;
-		case "right":
-			currentAnimation = allAnimations[RIGHT_ANIMATION];
-			break;
+		if (canMove) {
+			switch (direction) {
+			case "up":
+				currentAnimation = up ? allAnimations[UP_ANIMATION] : allAnimations[UP_IDLE_ANIMATION];
+				break;
+			case "down":
+				currentAnimation = down ? allAnimations[DOWN_ANIMATION] : allAnimations[DOWN_IDLE_ANIMATION];
+				break;
+			case "left":
+				currentAnimation = allAnimations[LEFT_ANIMATION];
+				break;
+			case "right":
+				currentAnimation = allAnimations[RIGHT_ANIMATION];
+				break;
+			}
 		}
-	
+
 		controller.tick();
 	}
 
@@ -138,7 +152,7 @@ public class Player extends Mob {
 			right = Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 		}
 
-		if (up || down || left || right) {
+		if (direction == "up" || direction == "down" || left || right) {
 			animationTimer += Gdx.graphics.getDeltaTime();
 		}
 		TextureRegion texture = currentAnimation.getKeyFrame(animationTimer, true);
@@ -147,10 +161,10 @@ public class Player extends Mob {
 		if (light != null) {
 			light.setPos(position.x + 0.5f, position.y + 1f);
 		}
-		
+
 		g.drawTexture(texture, position.x, position.y, 1f, 2f);
 		moveCameraToPlayer(g, position.x, position.y);
-		
+
 		controller.draw(g);
 	}
 
@@ -199,10 +213,10 @@ public class Player extends Mob {
 	public void setDialogues(Array<String> dialogues, String dialogueFinishLevel) {
 		this.dialogues = dialogues;
 		this.dialogueFinishLevel = dialogueFinishLevel;
-		
+
 		TheLastEmpire.getTheLastEmpire().setGuiScreen(new GuiDialogue(this, this::onDialogueFinish, level), false);
 	}
-	
+
 	private void onDialogueFinish() {
 		level.loadLevel(dialogueFinishLevel, true, false);
 	}
@@ -214,7 +228,7 @@ public class Player extends Mob {
 	public Texture getTexture() {
 		return player;
 	}
-	
+
 	public Inventory getInventory() {
 		return inventory;
 	}
@@ -222,22 +236,22 @@ public class Player extends Mob {
 	public void setItems(Item[] items) {
 		inventory.addAll(items);
 	}
-	
+
 	public Level getLevel() {
 		return level;
 	}
-	
+
 	public PlayerController getController() {
 		return controller;
 	}
-	
+
 	public void stopMoving() {
 		up = false;
 		down = false;
 		left = false;
 		right = false;
 	}
-	
+
 	@Override
 	public void remove() {
 		super.remove();
@@ -246,5 +260,5 @@ public class Player extends Mob {
 		tle.setGuiScreen(new GuiGameOver(), true);
 		DomPedroII.increaseTries();
 	}
-	
+
 }

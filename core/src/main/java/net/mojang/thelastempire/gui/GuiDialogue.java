@@ -19,6 +19,7 @@ public class GuiDialogue extends GuiScreen {
 
 	private final static TextureRegion BACKDROP_TEXTURE = new TextureRegion(Resources.getTexture("dialogue"), 0, 0, 128,
 			51);
+	private final static TextureRegion ICON_TEXTURE = new TextureRegion(Resources.getTexture("dialogue"), 0, 64, 7, 8);
 	private final static float SCALE = 4f;
 
 	private NPC npc;
@@ -38,13 +39,20 @@ public class GuiDialogue extends GuiScreen {
 	private Runnable onDialogueFinish;
 	private Level level;
 
-	public GuiDialogue(Array<NPCDialogue> dialogues, NPC npc, Runnable onDialogueFinish, Level level) {
+	private boolean isSkippable = false;
+
+	private int oldTicks = 0;
+	private int ticks = 0;
+
+	public GuiDialogue(Array<NPCDialogue> dialogues, NPC npc, Runnable onDialogueFinish, Level level,
+			boolean isSkippable) {
 		this.level = level;
 		this.dialogues = dialogues;
 		this.npc = npc;
 		this.npcTexture = new TextureRegion(npc.getTexture(), 0, 0, 16, 14);
 		this.playerTexture = new TextureRegion(Resources.getTexture("char"), 0, 0, 16, 14);
 		this.onDialogueFinish = onDialogueFinish;
+		this.isSkippable = isSkippable;
 	}
 
 	public GuiDialogue(Player player, Runnable onDialogueFinish, Level level) {
@@ -53,7 +61,7 @@ public class GuiDialogue extends GuiScreen {
 		this.playerTexture = new TextureRegion(player.getTexture(), 0, 0, 16, 14);
 		this.onDialogueFinish = onDialogueFinish;
 	}
-	
+
 	public GuiDialogue(Array<String> dialogues, String textureName, Runnable onDialogueFinish, Level level) {
 		this.level = level;
 		this.dialogues2 = dialogues;
@@ -64,6 +72,9 @@ public class GuiDialogue extends GuiScreen {
 	@Override
 	public void tick() {
 		super.tick();
+
+		oldTicks = ticks;
+		ticks++;
 
 		String str = getCurrentDialogueString();
 
@@ -94,11 +105,12 @@ public class GuiDialogue extends GuiScreen {
 	}
 
 	private void handleOptionInput() {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && isSkippable) {
 			skipDialogue();
 		}
-		
-		if (!inOptionSelection || optionKeys.size == 0) return;
+
+		if (!inOptionSelection || optionKeys.size == 0)
+			return;
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 			selectedOption = (selectedOption - 1 + optionKeys.size) % optionKeys.size;
@@ -127,6 +139,16 @@ public class GuiDialogue extends GuiScreen {
 
 		g.drawTexture(BACKDROP_TEXTURE, x, y, dialogWidth, dialogHeight);
 
+		float a = oldTicks + (ticks - oldTicks) * TheLastEmpire.a;
+		float scalar = 0.8f + ((1 + MathUtils.cos(a * 0.2f)) / 2) * 0.4f;
+
+		float xs = ICON_TEXTURE.getRegionWidth() * 3f * scalar;
+		float ys = ICON_TEXTURE.getRegionHeight() * 3f * scalar;
+
+		float rx = x + dialogWidth - 24f;
+		float ry = y + dialogHeight - 8f;
+		g.drawTexture(ICON_TEXTURE, rx - xs / 2f, ry - ys / 2f, xs, ys);
+
 		drawNPC(g);
 		drawDialogueText(g);
 		if (inOptionSelection)
@@ -137,7 +159,7 @@ public class GuiDialogue extends GuiScreen {
 		if (inOptionSelection)
 			return;
 
-		if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)
+		if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isTouched()
 				|| Gdx.input.isKeyJustPressed(Input.Keys.E)) && dialogueChar >= getCurrentDialogueString().length()) {
 
 			if (dialogueIndex < getDialogueSize() - 1) {
@@ -166,7 +188,7 @@ public class GuiDialogue extends GuiScreen {
 		if (c > 5) {
 			s = 4.4f;
 		}
-		
+
 		float x = (g.getScreenWidth() - width) / 2f;
 		float y = (g.getScreenHeight() + 50 * s) / 2f;
 
@@ -198,27 +220,27 @@ public class GuiDialogue extends GuiScreen {
 	}
 
 	private void drawOptions(Graphics g) {
-		float oy = (g.getScreenHeight() / 2f) - (optionKeys.size * g.getFontSize() * 1.5f);		    
+		float oy = (g.getScreenHeight() / 2f) - (optionKeys.size * g.getFontSize() * 1.5f);
 
 		for (int i = 0; i < optionKeys.size; i++) {
 			String text = optionKeys.get(i);
 			String[] lines = text.split("\n");
 
-		    int c = (i == selectedOption) ? 0xFFFF00 : 0xAAAAAA;
-		    g.drawCenteredString("> ", g.getScreenWidth() - g.getStringWidth(lines[0]) - 20, oy, c);
-			
+			int c = (i == selectedOption) ? 0xFFFF00 : 0xAAAAAA;
+			g.drawCenteredString("> ", g.getScreenWidth() - g.getStringWidth(lines[0]) - 20, oy, c);
+
 			for (int j = 0; j < lines.length; j++) {
 				String line = lines[j];
 				g.drawCenteredString(line, g.getScreenWidth(), oy, c);
-				if (lines.length > 1) {					
+				if (lines.length > 1) {
 					oy -= g.getFontSize() * 1.5f;
 				}
 			}
-			
+
 			oy -= g.getFontSize() * 1.5f;
 		}
 	}
-	
+
 	private void skipDialogue() {
 		theLastEmpire.setGuiScreen(null, false);
 		npc.endChatting(false);

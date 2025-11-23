@@ -33,6 +33,7 @@ public class Decoration extends Entity {
 		float xPos = decorationValue.getFloat("xPos");
 		float yPos = decorationValue.getFloat("yPos");
         int type = decorationValue.getInt("type", 0);
+        String stage = decorationValue.getString("stage", "full");
 
 		switch (name) {
 		case "Skull":
@@ -45,6 +46,14 @@ public class Decoration extends Entity {
             return new BookDecoration(level, xPos, yPos);
         case "Mug":
             return new MugDecoration(level, xPos, yPos, type);
+		case "Barrel":
+			return new BarrelDecoration(level, xPos, yPos);
+		case "Plant":
+			return new PlantDecoration(level, xPos, yPos, stage);
+		case "Flower":
+			return new FlowerDecoration(level, xPos, yPos, type);
+		case "Garbage Can":
+			return new GarbageCanDecoration(level, xPos, yPos);
 		}
 		return null;
 	}

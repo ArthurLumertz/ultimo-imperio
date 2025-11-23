@@ -67,11 +67,6 @@ public class LevelParser {
 			TheLastEmpire.getTheLastEmpire().playMusic(levelSound, true);
 		}
 
-		String postCard = rootValue.getString("postCard", null);
-		if (postCard != null) {
-			TheLastEmpire.getTheLastEmpire().setPostCard(postCard);
-		}
-
 		JsonValue rawHouses = rootValue.get("houses");
 		JsonValue rawLights = rootValue.get("lights");
 		JsonValue rawNpcs = rootValue.get("npcs");

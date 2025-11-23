@@ -43,6 +43,7 @@ public class Resources {
 		assetManager.load("barrackentrance.png", Texture.class);
 		assetManager.load("icons.png", Texture.class);
 		assetManager.load("decoration.png", Texture.class);
+		assetManager.load("cursor.png", Texture.class);
 
 		assetManager.load("npcs/oldman.png", Texture.class);
 		assetManager.load("npcs/man0.png", Texture.class);

@@ -15,8 +15,8 @@ public class FemaleNPC extends NPC {
 			Resources.getNPC("woman2")
 	};
 
-	public FemaleNPC(Level level, int id, float x, float y, float xt, float yt, String name, String levelName, Array<NPCDialogue> dialogues, String direction, boolean canMove) {
-		super(level, x, y, xt, yt, name, levelName, dialogues, direction, canMove);
+	public FemaleNPC(Level level, int id, float x, float y, float xt, float yt, String name, String levelName, Array<NPCDialogue> dialogues, String direction, boolean canMove, boolean skippableDialogue) {
+		super(level, x, y, xt, yt, name, levelName, dialogues, direction, canMove, skippableDialogue);
 
 		createAnimation(textures[id]);
 		texture = new TextureRegion(textures[id], 0, 0, 16, 32);

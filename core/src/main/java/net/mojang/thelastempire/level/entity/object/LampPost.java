@@ -23,7 +23,7 @@ public class LampPost extends Entity {
 		setSize(1, 0.5f);
 		setPos(x, y);
 		Color color = new Color(1f, 0.5f, 0.2f, 1f);
-		float outerRadius = 4f;
+		float outerRadius = 2f;
 		light0 = new Light(x + 0.2f, y + 1.8f, 0.5f, 0.1f, outerRadius, color);
 		light1 = new Light(x + 1.5f, y + 1.8f, 0.5f, 0.1f, outerRadius, color);
 		Graphics.instance.setLight(light0);

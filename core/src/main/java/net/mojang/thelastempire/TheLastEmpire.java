@@ -3,14 +3,16 @@ package net.mojang.thelastempire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 import net.mojang.thelastempire.engine.AudioManager;
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.Resources;
-import net.mojang.thelastempire.gui.GuiMainMenu;
+import net.mojang.thelastempire.gui.GuiCredits;
 import net.mojang.thelastempire.gui.GuiScreen;
 import net.mojang.thelastempire.gui.scene.SceneManager;
 import net.mojang.thelastempire.level.Level;
@@ -30,64 +32,39 @@ public class TheLastEmpire extends Game {
 	private SceneManager sceneManager;
 	private AudioManager audioManager;
 
-	private String postCard;
-	private float timer = 0;
-	private float oldAlpha;
-	private float alpha;
-	private float yo;
+	private int timer = 0;
+	private int oldTimer = 0;
 
 	private boolean debug = false;
-
-	public void setPostCard(String postCard) {
-		this.postCard = postCard;
-		this.timer = 0;
-		this.alpha = 1;
-		this.oldAlpha = alpha;
-		this.yo = 32 * 3;
-	}
 
 	@Override
 	public void create() {
 		Resources.loadResources();
 		backdropTexture = new TextureRegion(Resources.getTexture("dialogue"), 0, 64, 48, 32);
 
+		Gdx.graphics.setSystemCursor(Cursor.SystemCursor.None);
+
 		sceneManager = new SceneManager(this);
 		audioManager = new AudioManager();
 
+		String[] mapsInOrder = { "palace", "palacecutscene", "level0" };
+
 		setGuiScreen(null, false);
-		load();
+		load(mapsInOrder[0]);
 	}
 
 	@Override
 	public void tick() {
 		sceneManager.tick();
 
+		oldTimer = timer;
+		timer++;
+
 		if (!isInGame()) {
 			return;
 		}
 
 		levelRenderer.tick();
-
-		if (postCard == null) {
-			return;
-		}
-		if (yo > 0) {
-			yo -= 2;
-			return;
-		}
-
-		timer += 0.04f;
-		oldAlpha = alpha;
-
-		if (timer > MathUtils.PI / 3) {
-			alpha = MathUtils.cos(timer);
-			alpha = Math.max(0f, Math.min(alpha, 1f));
-		}
-
-		if (timer > MathUtils.PI) {
-			postCard = null;
-			timer = 0;
-		}
 	}
 
 	@Override
@@ -114,24 +91,17 @@ public class TheLastEmpire extends Game {
 					g.getScreenHeight() - g.getFontSize(), 0xFFFFFF);
 		}
 
-		if (postCard != null) {
-			float a = MathUtils.lerp(oldAlpha, alpha, TheLastEmpire.a);
-			g.setColor(1f, 1f, 1f, a);
-			g.drawTexture(backdropTexture, (g.getScreenWidth() - 48 * 4) / 2, g.getScreenHeight() - 32 * 3 + yo, 48 * 4,
-					32 * 3);
-
-			int ir = (int) (1f * 255.0f);
-			int ig = (int) (1f * 255.0f);
-			int ib = (int) (1f * 255.0f);
-			int ia = (int) (a * 255.0f);
-			int color = (ia << 24) | (ir << 16) | (ig << 8) | ib;
-
-			g.drawString(postCard, (g.getScreenWidth() - g.getStringWidth(postCard)) / 2f,
-					g.getScreenHeight() - g.getFontSize() * 2.5f + yo, color);
-			g.setColor(1f, 1f, 1f, 1f);
-		}
-
 		sceneManager.draw(g);
+
+		Vector2 mouseCoords = g.unproject(Gdx.input.getX(), Gdx.input.getY());
+		float a = oldTimer + (timer - oldTimer) * TheLastEmpire.a;
+		float scalar = 0.9f + ((1f + MathUtils.cos(a * 0.2f)) / 2f) * 0.2f;
+		float rs = 48f;
+		float xs = rs * scalar;
+		float ys = xs;
+		float rx = mouseCoords.x + rs / 2f;
+		float ry = mouseCoords.y - rs / 2f;
+		g.drawTexture(Resources.getTexture("cursor"), rx - xs / 2f, ry - ys / 2f, xs, ys);
 
 		g.end();
 
@@ -172,11 +142,11 @@ public class TheLastEmpire extends Game {
 		return hasLoaded || !sceneManager.isPaused();
 	}
 
-	public void load() {
+	public void load(String levelName) {
 		hasLoaded = true;
 
 		level = new Level(this);
-		level.loadLevel("palace", false, false);
+		level.loadLevel(levelName, false, false);
 		levelRenderer = new LevelRenderer(level);
 		level.addLevelRenderer(levelRenderer);
 	}

@@ -40,7 +40,18 @@ public class House extends EntityPassable {
 	public void tick() {
 		super.tick();
 
+		timer++;
+		if (timer > 5) {
+			EntitySmokeFX entityFX = new EntitySmokeFX(level, x + 4, y + 6);
+			level.addEntity(entityFX);
+
+			timer -= 5;
+		}
+
 		Player player = level.getPlayer();
+		if (!player.canMove) {
+			return;
+		}
 
 		float dx = player.x + player.bbWidth / 2 - (eventRect.x + eventRect.width / 2);
 		float dy = player.y + player.bbHeight / 2 - (eventRect.y + eventRect.height / 2);
@@ -58,14 +69,6 @@ public class House extends EntityPassable {
 		Rectangle playerRect = Rectangle.tmp.set(player.x, player.y, player.bbWidth, 2f);
 		if (eventRect.overlaps(playerRect)) {
 			level.loadLevel(levelToGo, true, true);
-		}
-
-		timer++;
-		if (timer > 5) {
-			EntitySmokeFX entityFX = new EntitySmokeFX(level, x + 4, y + 6);
-			level.addEntity(entityFX);
-
-			timer -= 5;
 		}
 	}
 

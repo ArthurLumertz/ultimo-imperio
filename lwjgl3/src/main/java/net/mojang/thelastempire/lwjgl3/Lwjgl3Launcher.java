@@ -23,6 +23,7 @@ public class Lwjgl3Launcher {
 		configuration.useVsync(true);
 		configuration.setWindowedMode(960, 540);
 		configuration.setResizable(false);
+		configuration.setWindowIcon("icon.png");
 		return configuration;
 	}
 

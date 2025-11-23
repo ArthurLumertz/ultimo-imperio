@@ -91,13 +91,17 @@ public class Graphics {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
-		applyLights();
+		if (!gui) {			
+			applyVignette();
+			applyLights();
+		}
+	}
+	
+	private void applyVignette() {
+		shader.setUniformf("u_resolution", Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	private void applyLights() {
-		if (gui)
-			return;
-
 		queryLights.clear();
 		for (Light light : lights) {
 			if (light.shouldRender()) {
@@ -213,7 +217,7 @@ public class Graphics {
 	public TextureRegion getParticle(int px, int py, int pw, int ph) {
 		return particleSheet.getRegion(px, py, pw, ph);
 	}
-
+	
 	public void setOffset(float x, float y, float a) {
 		tmpVec3.set(x, y, 0f);
 		camera.position.set(tmpVec3);

@@ -66,8 +66,6 @@ public class SceneManager {
 				startFade();
 			} 			
 		}
-
-		Gdx.graphics.setForegroundFPS((screen != null ? 60 : Gdx.graphics.getDisplayMode().refreshRate + 1));
 		
 		this.screen = screen;
 	}

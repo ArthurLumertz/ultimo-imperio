@@ -47,9 +47,10 @@ public class NPC extends Mob {
 	private String levelName;
 
 	private boolean canMove = true;
+	private boolean skippableDialogue;
 
 	public NPC(Level level, float x, float y, float xt, float yt, String name, String levelName,
-			Array<NPCDialogue> dialogues, String direction, boolean canMove) {
+			Array<NPCDialogue> dialogues, String direction, boolean canMove, boolean skippableDialogue) {
 		super(level, 100);
 		this.levelName = levelName;
 		this.name = name;
@@ -59,6 +60,7 @@ public class NPC extends Mob {
 		this.yt = yt;
 		this.canMove = canMove;
 		this.direction = direction;
+		this.skippableDialogue = skippableDialogue;
 		setPos(x, y);
 
 		advanceAi(true, false);
@@ -157,7 +159,8 @@ public class NPC extends Mob {
 				float dy = yt - y;
 				float distance = (float) Math.sqrt(dx * dx + dy * dy);
 				
-				if (distance > 1f) {
+				float epsilon = 0.01f;
+				if (distance > epsilon) {
 					float nx = dx / distance;
 					float ny = dy / distance;
 
@@ -281,7 +284,7 @@ public class NPC extends Mob {
 		left = false;
 		right = false;
 
-		GuiDialogue guiDialogue = new GuiDialogue(dialogues, this, null, level);
+		GuiDialogue guiDialogue = new GuiDialogue(dialogues, this, null, level, skippableDialogue);
 		TheLastEmpire.getTheLastEmpire().setGuiScreen(guiDialogue, false);
 	}
 
@@ -363,6 +366,7 @@ public class NPC extends Mob {
 		String levelName = rawNpc.getString("levelName", null);
 		boolean canMove = rawNpc.getBoolean("canMove", true);
 		String direction = rawNpc.getString("direction", "down");
+		boolean skippableDialogue = rawNpc.getBoolean("skippableDialogue", false);
 
 		if (x < 0f || y < 0f) {
 			x = MathUtils.random(0, level.getWidth());
@@ -374,9 +378,9 @@ public class NPC extends Mob {
 
 		switch (npcType) {
 		case "Male":
-			return new MaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove);
+			return new MaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove, skippableDialogue);
 		case "Female":
-			return new FemaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove);
+			return new FemaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove, skippableDialogue);
 		default:
 			throw new RuntimeException("Failed to find NPC: " + npcType + "!");
 		}

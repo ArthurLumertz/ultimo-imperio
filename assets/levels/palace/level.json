@@ -8,6 +8,7 @@
 			"xPos": 2.0,
 			"yPos": 9.0,
 			"type": 0,
+			"skippableDialogue": true,
 			"dialogues": {
 				"0": "Bom dia, senhor. Precisa de algo? Acabei de tirar\no pão do forno.",
 				"1": "Desde que começaram a falar de República, meu marido\nnão dorme direito...",

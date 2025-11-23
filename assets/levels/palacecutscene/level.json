@@ -1,7 +1,7 @@
 {
 	"xSpawn": 21.5,
 	"ySpawn": 50.5,
-	"globalLight": 0.7,
+	"globalLight": 0.3,
 	"canMove": false,
 	"npcs": {
 		"Male": {
@@ -10,7 +10,7 @@
 			"xtPos": 21.5,
 			"ytPos": 49.5,
 			"dialogues": {
-				"0": "Bom dia senhor, eu fiquei sabendo que\nDom Pedro será deposto.",
+				"0": "Bom noite senhor, eu fiquei sabendo que\nDom Pedro será deposto.",
 				
 				"1": {
 					"text": "Você pode me dizer se\nessa informação é verídica?",
@@ -29,6 +29,83 @@
 				},
 			},
 			"levelName": "barracks"
+		},
+		"Female": {
+			"type": 2,
+			"xPos": 15.0,
+			"yPos": 47.0,
+			"xtPos": 15.0,
+			"ytPos": 60.0,
+		},
+		"Male": {
+			"type": 1,
+			"xPos": 25.0,
+			"yPos": 50.0,
+			"xtPos": 50.0,
+			"ytPos": 50.0,
+		}
+	},
+	"decorations": {
+		"Barrel": {
+			"xPos": 24.6,
+			"yPos": 52.0,
+		},
+		"Barrel": {
+			"xPos": 24.5,
+			"yPos": 52.7,
+		},
+		"Barrel": {
+			"xPos": 25.3,
+			"yPos": 52.4,
+		},
+		"Plant": {
+			"xPos": 17.3,
+			"yPos": 53.8,
+			"stage": "full",
+		},
+		"Plant": {
+			"xPos": 17.3,
+			"yPos": 52.9,
+			"stage": "mid",	
+		},
+		"Plant": {
+			"xPos": 18.2,
+			"yPos": 53.2,
+			"stage": "early",	
+		},
+		"Flower": {
+			"type": 0,
+			"xPos": 12.7,
+			"yPos": 46.8,
+		},
+		"Flower": {
+			"type": 1,
+			"xPos": 18.7,
+			"yPos": 46.0,
+		},
+		"Flower": {
+			"type": 2,
+			"xPos": 25.7,
+			"yPos": 47.8,
+		},
+		"Plant": {
+			"xPos": 30.3,
+			"yPos": 53.8,
+			"stage": "full",
+		},
+		"Plant": {
+			"xPos": 30.2,
+			"yPos": 52.9,
+			"stage": "mid",	
+		},
+		"Plant": {
+			"xPos": 31.2,
+			"yPos": 53.2,
+			"stage": "early",	
+		},
+		"Garbage Can": {
+			"xPos": 17.3,
+			"yPos": 51.2,
 		}
 	},
 	"houses": {
@@ -57,8 +134,16 @@
 			"yPos": 48.5,
 		},
 		"Lamp Post": {
-			"xPos": 26.5,
+			"xPos": 26.0,
+			"yPos": 51.5,
+		},
+		"Lamp Post": {
+			"xPos": 12.5,
 			"yPos": 48.5,
+		},
+		"Lamp Post": {
+			"xPos": 12.5,
+			"yPos": 53.5,
 		},
 	}
 }

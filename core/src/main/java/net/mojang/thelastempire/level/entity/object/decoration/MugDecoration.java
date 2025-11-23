@@ -1,7 +1,6 @@
 package net.mojang.thelastempire.level.entity.object.decoration;
 
 import net.mojang.thelastempire.level.Level;
-import net.mojang.thelastempire.level.particle.EntitySmokeFX;
 import net.mojang.thelastempire.level.particle.EntityVaporFX;
 import net.mojang.thelastempire.math.RectangleI;
 
