@@ -3,7 +3,7 @@ package net.mojang.thelastempire.level.entity.object.decoration;
 import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.math.RectangleI;
 
-public class FlowerDecoration extends Decoration {
+public class FlowerDecoration extends EntityDecoration {
 
 	private static final RectangleI[] textures = {
 			new RectangleI(16, 32, 16, 16),
@@ -13,6 +13,7 @@ public class FlowerDecoration extends Decoration {
 
 	public FlowerDecoration(Level level, float x, float y, int type) {
 		super(level, x, y, 1f, 1f, textures[type]);
+		noPhysics = true;
 	}
 
 }

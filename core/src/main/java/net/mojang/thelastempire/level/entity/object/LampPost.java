@@ -2,6 +2,7 @@ package net.mojang.thelastempire.level.entity.object;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 
 import net.mojang.thelastempire.engine.Color;
 import net.mojang.thelastempire.engine.Graphics;
@@ -68,6 +69,12 @@ public class LampPost extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.drawTexture(texture, x - 0.5f, y, 2, 3);
+	}
+	
+	@Override
+	public boolean shouldTick() {
+		Rectangle bb = Rectangle.tmp.set(x, y, bbWidth, 3f);
+		return Graphics.instance.inViewport(bb);
 	}
 
 }

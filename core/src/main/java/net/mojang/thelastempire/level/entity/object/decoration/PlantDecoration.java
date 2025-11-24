@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.math.RectangleI;
 
-public class PlantDecoration extends Decoration {
+public class PlantDecoration extends EntityDecoration {
 
 	private static final ObjectMap<String, RectangleI> textures = new ObjectMap<String, RectangleI>(){{
 			put("early", new RectangleI(0, 48, 16, 16));

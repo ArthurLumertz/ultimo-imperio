@@ -3,6 +3,7 @@
 	"ySpawn": 1.5,
 	"levelSound": "fireplace",
 	"globalLight": 0.4,
+	"direction": "up",
 	"furniture": {
 		"Carpet": {
 			"xPos": 2.0,
@@ -49,7 +50,7 @@
 			"xPos": 6.0,
 			"yPos": 0.5,
 			"levelName": "level0",
-			"xSpawn": 21.5,
+			"xSpawn": 8.3,
 			"ySpawn": 50.5
 		}
 	},
@@ -58,6 +59,7 @@
 			"type": 0,			
 			"xPos": 5.0,
 			"yPos": 3.0,
+			"skippableDialogue": true,
 			"dialogues": [
 				"As paredes ainda guardam ecos do\nque já foi... Mas pouca coisa permanece.",
 				"Chegou tarde... ou talvez no momento\ncerto. Depende do que procura.",

@@ -4,7 +4,7 @@
 	"globalLight": 0.3,
 	"canMove": false,
 	"npcs": {
-		/*"Male": {
+		"Male": {
 			"xPos": 21.5,
 			"yPos": 47.5,
 			"xtPos": 21.5,
@@ -22,14 +22,14 @@
 						},
 						"Mentir": {
 							"dialogue": "Não, eu jamais faria isso com nosso\namado governante, volte para o buraco\nde onde você veio, seu traidor imundo!",
-							"response": "Eu devia ter adivinhado, todos vocês\nno poder são exatamente iguais;\ncriaturas gananciosas que ofereceriam\nseu povo como oferenda ao diabo em\ntroca de alguns trocados. Enfim, tomara\nque você morra dolorosamente servindo\no seu \"amado governante\", escória.",
+							"response": "Eu já devia saber... vocês no poder\nsão todos iguais: gananciosos, venderiam\no povo por trocados. Tomara que morra servindo \nseu \"governante\", sua escória.",
 							"emotionChange": "angry"
 						}
 					}
 				},
 			},
 			"levelName": "barracks"
-		},*/
+		},
 		"Female": {
 			"type": 2,
 			"xPos": 15.0,

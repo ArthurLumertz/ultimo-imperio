@@ -2,6 +2,7 @@
 	"xSpawn": 6.0,
 	"ySpawn": 1.5,
 	"globalLight": 0.4,
+	"direction": "up",
 	"furniture": {
 		"Carpet": {
 			"xPos": 2.0,

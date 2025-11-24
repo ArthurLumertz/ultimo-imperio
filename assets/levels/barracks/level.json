@@ -23,10 +23,11 @@
 	},
 	"npcs": {
 		"Male": {
+			"name": "General",
 			"xPos": 15.5,
-			"yPos": 18.0,
+			"yPos": 19.0,
 			"xtPos": 15.5,
-			"ytPos": 15.0,
+			"ytPos": 16,
 			"type": 3,
 			"dialogues": {
 				"0": "Olá Marechal, o que te traz aqui hoje?",

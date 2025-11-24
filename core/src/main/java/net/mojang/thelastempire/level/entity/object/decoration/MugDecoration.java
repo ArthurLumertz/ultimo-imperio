@@ -4,7 +4,7 @@ import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.level.particle.EntityVaporFX;
 import net.mojang.thelastempire.math.RectangleI;
 
-public class MugDecoration extends Decoration {
+public class MugDecoration extends EntityDecoration {
 
     private int timer;
 

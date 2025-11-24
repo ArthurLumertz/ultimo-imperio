@@ -53,8 +53,12 @@ public class Player extends Mob {
 	private Light light = null;
 	protected boolean isDashing = false;
 
-	public Player(Level level, float xs, float ys, boolean canMove, String direction) {
+	private Vec2 cameraOffset;
+
+	public Player(Level level, float xs, float ys, boolean canMove, String direction, Vec2 cameraOffset) {
 		super(level, 20);
+
+		this.cameraOffset = cameraOffset;
 
 		setPos(xs, ys);
 		xo = x;
@@ -167,7 +171,7 @@ public class Player extends Mob {
 		}
 
 		g.drawTexture(texture, position.x, position.y, 1f, 2f);
-		moveCameraToPlayer(g, position.x, position.y);
+		moveCameraToPlayer(g, position.x + cameraOffset.x, position.y + cameraOffset.y);
 
 		controller.draw(g);
 	}
@@ -202,31 +206,39 @@ public class Player extends Mob {
 	}
 
 	public void interact(NPC npc) {
-		 Vec2 vPlayerToNPC = Vec2.newTemp(npc.x - x, npc.y - y);
-		    float dist2 = vPlayerToNPC.lengthSquared();
-		    
-		    if (dist2 > 0f) {
-		        vPlayerToNPC.normalize();
+		Vec2 vPlayerToNPC = Vec2.newTemp(npc.x - x, npc.y - y);
+		float dist2 = vPlayerToNPC.lengthSquared();
 
-		        if (vPlayerToNPC.y > 0.2f) direction = "up";
-		        else if (vPlayerToNPC.y < -0.2f) direction = "down";
+		if (dist2 > 0f) {
+			vPlayerToNPC.normalize();
 
-		        if (vPlayerToNPC.x > 0.2f) direction = "right";
-		        else if (vPlayerToNPC.x < -0.2f) direction = "left";
+			if (vPlayerToNPC.y > 0.2f)
+				direction = "up";
+			else if (vPlayerToNPC.y < -0.2f)
+				direction = "down";
 
-		        updateAnimation();
+			if (vPlayerToNPC.x > 0.2f)
+				direction = "right";
+			else if (vPlayerToNPC.x < -0.2f)
+				direction = "left";
 
-		        Vec2 vNPCToPlayer = Vec2.newTemp(x - npc.x, y - npc.y);
-		        vNPCToPlayer.normalize();
+			updateAnimation();
 
-		        if (vNPCToPlayer.y > 0.2f) npc.direction = "up";
-		        else if (vNPCToPlayer.y < -0.2f) npc.direction = "down";
+			Vec2 vNPCToPlayer = Vec2.newTemp(x - npc.x, y - npc.y);
+			vNPCToPlayer.normalize();
 
-		        if (vNPCToPlayer.x > 0.2f) npc.direction = "right";
-		        else if (vNPCToPlayer.x < -0.2f) npc.direction = "left";
+			if (vNPCToPlayer.y > 0.2f)
+				npc.direction = "up";
+			else if (vNPCToPlayer.y < -0.2f)
+				npc.direction = "down";
 
-		        npc.updateAnimation();
-		    }
+			if (vNPCToPlayer.x > 0.2f)
+				npc.direction = "right";
+			else if (vNPCToPlayer.x < -0.2f)
+				npc.direction = "left";
+
+			npc.updateAnimation();
+		}
 
 		isChatting = true;
 		up = false;

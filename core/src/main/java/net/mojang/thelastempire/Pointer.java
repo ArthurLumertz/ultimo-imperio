@@ -3,11 +3,11 @@ package net.mojang.thelastempire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.TileSheet;
+import net.mojang.thelastempire.math.Mth;
 
 public class Pointer {
 
@@ -42,19 +42,27 @@ public class Pointer {
 	}
 
 	public void draw(Graphics g) {
-		if (currentPointer == null) {
+		if (currentPointer == null || Gdx.input.isCursorCatched()) {
 			return;
 		}
 
 		Vector2 mouseCoords = g.unproject(Gdx.input.getX(), Gdx.input.getY());
 		float a = oldTimer + (timer - oldTimer) * TheLastEmpire.a;
-		float scalar = 0.9f + ((1f + MathUtils.cos(a * 0.2f)) / 2f) * 0.2f;
+		float scalar = Mth.cosWave(a * 0.3f, 0.95f, 1.05f);
 		float rs = 48f;
 		float xs = rs * scalar;
 		float ys = xs;
 		float rx = mouseCoords.x + rs / 2f;
 		float ry = mouseCoords.y - rs / 2f;
-		g.drawTexture(currentPointer, rx - xs / 2f, ry - ys / 2f, xs, ys);
+		g.setColor(1f, 1f, 1f, 1f);
+
+		float xp = rx - xs / 2f;
+		float yp = ry - ys / 2f;
+
+		g.setColor(0f, 0f, 0f, 0.5f);
+		g.drawTexture(currentPointer, xp+rs/16f, yp-rs/16f, xs, ys);
+		g.setColor(1f, 1f, 1f, 1f);
+		g.drawTexture(currentPointer, xp, yp, xs, ys);
 	}
 
 	public void setPointer(int type) {
@@ -63,7 +71,10 @@ public class Pointer {
 
 	public static interface Type {
 		int DEFAULT = 0;
-		int TEXT_SELECT = 1;
+		int ADD = 1;
+		int MESSAGE = 2;
+		int SKIP = 3;
+		int UNAVAILABLE = 4;
 	}
 
 }

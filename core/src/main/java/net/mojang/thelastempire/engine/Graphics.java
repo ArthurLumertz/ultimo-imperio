@@ -54,7 +54,7 @@ public class Graphics {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(w, h);
 		viewport = new FitViewport(w, h, camera);
-		font = new Font(this, "default");
+		font = new Font(this, "bold");
 		tileSheet = new TileSheet("tiles");
 
 		String shaderName = gui ? "gui" : "default";
@@ -65,6 +65,8 @@ public class Graphics {
 		}
 		batch.setShader(shader);
 
+		plantSheet = new TileSheet("plants");
+		
 		if (!gui) {
 			font.setSize(16f / 48f);
 		} else {
@@ -72,7 +74,6 @@ public class Graphics {
 		}
 
 		playerSheet = new TileSheet("char");
-		plantSheet = new TileSheet("plants");
 		houseSheet = new TileSheet("houses");
 		furnitureSheet = new TileSheet("furniture");
 		particleSheet = new TileSheet("particles");

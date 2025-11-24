@@ -3,10 +3,12 @@ package net.mojang.thelastempire.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.math.MathUtils;
 
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.Resources;
+import net.mojang.thelastempire.level.tile.Tile;
 
 public class GuiIntro extends GuiScreen {
 
@@ -44,6 +46,7 @@ public class GuiIntro extends GuiScreen {
 
 	@Override
 	public void draw(Graphics g) {
+		drawTiledBackground(0x222222, Tile.stone, g);
 		textWriter.draw(g, true);
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -58,6 +61,7 @@ public class GuiIntro extends GuiScreen {
 
 	private void onFinish() {
 		Gdx.input.setCursorCatched(false);
+		Gdx.graphics.setSystemCursor(SystemCursor.None);
 		music.stop();
 
 		theLastEmpire.setGuiScreen(null, true);

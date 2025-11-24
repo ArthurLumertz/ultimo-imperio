@@ -35,6 +35,8 @@ public class GuiCredits extends GuiScreen {
 		yOldScroll = yScroll;
 		if (yScroll < Graphics.guiInstance.getFontSize() * lines.length) {
 			yScroll += scrollSpeed;
+		} else {
+			theLastEmpire.setGuiScreen(new GuiMainMenu(), true);
 		}
 	}
 

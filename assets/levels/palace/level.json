@@ -5,6 +5,7 @@
 	"levelSound": "fireplace",
 	"npcs": {
 		"Female": {
+			"name": "Maria",
 			"xPos": 2.0,
 			"yPos": 9.0,
 			"type": 0,

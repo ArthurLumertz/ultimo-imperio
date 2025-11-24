@@ -2,6 +2,7 @@
 	"xSpawn": 6.0,
 	"ySpawn": 1.5,
 	"levelSound": "fireplace",
+	"direction": "up",
 	"globalLight": 0.4,
 	"furniture": {
 		"Carpet": {
@@ -58,6 +59,7 @@
 			"type": 0,			
 			"xPos": 5.0,
 			"yPos": 3.0,
+			"skippableDialogue": true,
 			"dialogues": [
 				"Por que você está aqui?\nNão deveria estar em outro lugar?",
 				"Eu te vi chegando... o que você quer?",

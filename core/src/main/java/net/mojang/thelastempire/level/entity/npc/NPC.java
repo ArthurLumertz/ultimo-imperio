@@ -24,7 +24,7 @@ import net.mojang.thelastempire.level.tile.Tile;
 import net.mojang.thelastempire.level.tile.Tile.SoundType;
 
 public class NPC extends Mob {
-	
+
 	private static TheLastEmpire theLastEmpire = TheLastEmpire.getTheLastEmpire();
 
 	protected Array<NPCDialogue> dialogues;
@@ -164,7 +164,7 @@ public class NPC extends Mob {
 				float dy = yt - y;
 				float distance = (float) Math.sqrt(dx * dx + dy * dy);
 
-				float epsilon = 0.01f;
+				float epsilon = 0.1f;
 				if (distance > epsilon) {
 					float nx = dx / distance;
 					float ny = dy / distance;
@@ -206,7 +206,7 @@ public class NPC extends Mob {
 			advanceAi(false, false);
 		}
 	}
-	
+
 	public void updateAnimation() {
 		switch (direction) {
 		case "up":
@@ -299,20 +299,19 @@ public class NPC extends Mob {
 			g.drawTexture(texture, xx, yy, 1f, 2f);
 		}
 
-		Player player = level.getPlayer();
-
 		if (dialogues.size > 0 && !chatting) {
-			if (!player.boundingBox.intersects(boundingBox.grow(0.3f, 0.3f))) {
+			Player player = level.getPlayer();
+			if (!player.boundingBox.intersects(boundingBox.grow(0.4f, 0.4f))) {
 				return;
 			}
-			
+
 			Vector2 mousePos = theLastEmpire.mousePosition;
 			Rectangle tmpRect = Rectangle.tmp.set(x, y, 1f, 2f);
 			if (tmpRect.contains(mousePos)) {
-				theLastEmpire.setPointer(Pointer.Type.TEXT_SELECT);
+				theLastEmpire.setPointer(Pointer.Type.MESSAGE);
 			}
-			
-			if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
+
+			if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isTouched()) {
 				player.interact(this);
 				startChatting();
 			}
@@ -408,7 +407,7 @@ public class NPC extends Mob {
 		float xt = rawNpc.getFloat("xtPos", -1);
 		float yt = rawNpc.getFloat("ytPos", -1);
 		int type = rawNpc.getInt("type", 0);
-		String name = rawNpc.getString("name", "Unknown");
+		String name = rawNpc.getString("name", "Desconhecido");
 		String levelName = rawNpc.getString("levelName", null);
 		boolean canMove = rawNpc.getBoolean("canMove", true);
 		String direction = rawNpc.getString("direction", "down");
@@ -433,5 +432,5 @@ public class NPC extends Mob {
 			throw new RuntimeException("Failed to find NPC: " + npcType + "!");
 		}
 	}
-	
+
 }

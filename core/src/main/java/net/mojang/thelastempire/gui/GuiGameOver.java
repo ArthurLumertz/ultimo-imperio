@@ -7,13 +7,13 @@ import net.mojang.thelastempire.engine.Graphics;
 
 public class GuiGameOver extends GuiMenu {
 
-	private Array<GuiButton> buttons = new Array<GuiButton>();
+	private Array<Button> buttons = new Array<Button>();
 
 	@Override
 	public void init() {
 		buttons.clear();
-		buttons.add(new GuiButton(0, (width - 48 * 8) / 2, 64 * 4f, 48 * 8, 44, "Tentar de novo"));
-		buttons.add(new GuiButton(1, (width - 48 * 8) / 2, 64 * 3f, 48 * 8, 44, "Sair do Jogo"));
+		buttons.add(new Button(0, (width - 48 * 8) / 2, 64 * 4f, 48 * 8, 44, "Tentar de novo"));
+		buttons.add(new Button(1, (width - 48 * 8) / 2, 64 * 3f, 48 * 8, 44, "Sair do Jogo"));
 	}
 
 	@Override

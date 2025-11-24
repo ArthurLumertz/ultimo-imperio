@@ -17,12 +17,13 @@ import net.mojang.thelastempire.level.entity.npc.NPC;
 import net.mojang.thelastempire.level.entity.object.BarrackEntrance;
 import net.mojang.thelastempire.level.entity.object.House;
 import net.mojang.thelastempire.level.entity.object.LampPost;
-import net.mojang.thelastempire.level.entity.object.decoration.Decoration;
+import net.mojang.thelastempire.level.entity.object.decoration.EntityDecoration;
 import net.mojang.thelastempire.level.entity.object.event.EntityEvent;
 import net.mojang.thelastempire.level.entity.object.furniture.EntityFurniture;
 import net.mojang.thelastempire.level.entity.player.Player;
 import net.mojang.thelastempire.level.item.Item;
 import net.mojang.thelastempire.level.tile.Tile;
+import net.mojang.thelastempire.math.Vec2;
 
 public class LevelParser {
 
@@ -76,6 +77,7 @@ public class LevelParser {
 		JsonValue rawBosses = rootValue.get("bosses");
 		JsonValue rawItems = rootValue.get("items");
 		JsonValue rawDecorations = rootValue.get("decorations");
+		JsonValue rawCameraOffset = rootValue.get("cameraOffset");
 
 		parseHouses(rawHouses);
 		parseLights(rawLights);
@@ -84,6 +86,7 @@ public class LevelParser {
 		parseEntities(rawEntities);
 		parseBoss(rawBosses);
 		parseDecorations(rawDecorations);
+		Vec2 cameraOffset = parseCameraOffset(rawCameraOffset);
 		Item[] items = parseItems(rawItems);
 
 		Array<String> dialogues = parseDialogues(rawDialogues);
@@ -91,7 +94,7 @@ public class LevelParser {
 
 		float xSpawn = rootValue.getFloat("xSpawn", level.getWidth() / 2f);
 		float ySpawn = rootValue.getFloat("ySpawn", level.getHeight() / 2f);
-		Player player = new Player(level, xSpawn, ySpawn, canMove, direction);
+		Player player = new Player(level, xSpawn, ySpawn, canMove, direction, cameraOffset);
 		if (dialogues != null) {
 			player.setDialogues(dialogues, dialogueFinishLevel);
 		}
@@ -100,6 +103,16 @@ public class LevelParser {
 		}
 		level.addEntity(player);
 	}
+	
+	private Vec2 parseCameraOffset(JsonValue rawCameraOffset) {
+		if (rawCameraOffset == null) {
+			return Vec2.newPermanent(0, 0);
+		}
+		
+		float x = rawCameraOffset.getFloat("x");
+		float y = rawCameraOffset.getFloat("y");
+		return Vec2.newPermanent(x, y);
+	}
 
 	private void parseDecorations(JsonValue rawDecorations) {
 		if (rawDecorations == null) {
@@ -107,7 +120,7 @@ public class LevelParser {
 		}
 
 		for (JsonValue rawDecoration : rawDecorations) {
-			Decoration decoration = Decoration.createDecoration(rawDecoration, level);
+			EntityDecoration decoration = EntityDecoration.createDecoration(rawDecoration, level);
 			level.addEntity(decoration);
 		}
 	}

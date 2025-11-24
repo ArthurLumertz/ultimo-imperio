@@ -31,6 +31,7 @@ public class Resources {
 	public static void loadResources() {
 		assetManager.load("tiles.png", Texture.class);
 		assetManager.load("default.gif", Texture.class);
+		assetManager.load("bold.gif", Texture.class);
 		assetManager.load("dialogue.png", Texture.class);
 		assetManager.load("char.png", Texture.class);
 		assetManager.load("dompedro.png", Texture.class);

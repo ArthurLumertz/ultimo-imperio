@@ -98,7 +98,7 @@ public class Entity {
 	}
 
 	public String getName() {
-		return "Unknown";
+		return "Desconhecido";
 	}
 
 	public boolean shouldTick() {

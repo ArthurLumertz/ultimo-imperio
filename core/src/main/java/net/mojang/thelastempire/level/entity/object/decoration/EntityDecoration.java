@@ -10,13 +10,13 @@ import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.level.entity.Entity;
 import net.mojang.thelastempire.math.RectangleI;
 
-public class Decoration extends Entity {
+public class EntityDecoration extends Entity {
 
 	private static Texture tilesheet = Resources.getTexture("decoration");
 
 	private TextureRegion texture;
 
-	public Decoration(Level level, float x, float y, float w, float h, RectangleI rect) {
+	public EntityDecoration(Level level, float x, float y, float w, float h, RectangleI rect) {
 		super(level);
 		setPos(x, y);
 		setSize(w, h);
@@ -28,7 +28,7 @@ public class Decoration extends Entity {
 		g.drawTexture(texture, x, y, bbWidth, bbHeight);
 	}
 
-	public static Decoration createDecoration(JsonValue decorationValue, Level level) {
+	public static EntityDecoration createDecoration(JsonValue decorationValue, Level level) {
 		String name = decorationValue.name();
 		float xPos = decorationValue.getFloat("xPos");
 		float yPos = decorationValue.getFloat("yPos");

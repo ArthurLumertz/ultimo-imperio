@@ -8,7 +8,7 @@ import net.mojang.thelastempire.engine.Light;
 import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.math.RectangleI;
 
-public class SwordDecoration extends Decoration {
+public class SwordDecoration extends EntityDecoration {
 	
 	private Light light;
 	private int timer;

@@ -10,6 +10,7 @@ import net.mojang.thelastempire.engine.AudioManager;
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.Resources;
 import net.mojang.thelastempire.engine.TileSheet;
+import net.mojang.thelastempire.gui.GuiMainMenu;
 import net.mojang.thelastempire.gui.GuiScreen;
 import net.mojang.thelastempire.gui.scene.SceneManager;
 import net.mojang.thelastempire.level.Level;
@@ -42,10 +43,10 @@ public class TheLastEmpire extends Game {
 		sceneManager = new SceneManager(this);
 		audioManager = new AudioManager();
 
-		String[] mapsInOrder = { "palace", "palacecutscene", "level0" };
+		String[] mapsInOrder = { "palace", "palacecutscene", "barracks", "barracks2" };
 
-		setGuiScreen(null, false);
-		load(mapsInOrder[1]);
+		setGuiScreen(new GuiMainMenu(), false);
+//		load("palace");
 	}
 
 	@Override
@@ -84,6 +85,8 @@ public class TheLastEmpire extends Game {
 		if (debug) {
 			g.drawString("FPS: " + Gdx.graphics.getFramesPerSecond(), g.getFontSize(),
 					g.getScreenHeight() - g.getFontSize(), 0xFFFFFF);
+			g.drawString("X/Y: " + level.getPlayer().x + ", " + level.getPlayer().y, g.getFontSize(),
+					g.getScreenHeight() - g.getFontSize() * 3f, 0xFFFFFF);
 		}
 
 		sceneManager.draw(g);

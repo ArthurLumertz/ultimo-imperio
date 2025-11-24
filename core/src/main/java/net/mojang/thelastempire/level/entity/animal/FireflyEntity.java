@@ -17,7 +17,9 @@ import net.mojang.thelastempire.math.Vec2;
 
 public class FireflyEntity extends Entity {
 
-	private static Texture texture = Resources.getTexture("firefly");
+	private static final TextureRegion[] FRAMES_NORMAL;
+	private static final TextureRegion[] FRAMES_FLIPPED;
+
 	private Animation<TextureRegion> frames;
 	private float timer = 0;
 	private Light light;
@@ -29,24 +31,28 @@ public class FireflyEntity extends Entity {
 	private float intensity = 0.4f;
 	private float piAmount;
 
+	static {
+		Texture t = Resources.getTexture("firefly");
+
+		FRAMES_NORMAL = new TextureRegion[] { new TextureRegion(t, 0, 0, 8, 8), new TextureRegion(t, 8, 0, 8, 8) };
+
+		FRAMES_FLIPPED = new TextureRegion[] { new TextureRegion(t, 0, 0, 8, 8), new TextureRegion(t, 8, 0, 8, 8) };
+
+		FRAMES_FLIPPED[0].flip(true, false);
+		FRAMES_FLIPPED[1].flip(true, false);
+	}
+
 	public FireflyEntity(Level level, float x, float y) {
 		super(level);
 		setPos(x, y);
 		setSize(0.5f, 0.5f);
 
-		TextureRegion[] regions = new TextureRegion[] {
-				new TextureRegion(texture, 0, 0, 8, 8),
-				new TextureRegion(texture, 8, 0, 8, 8)
-		};
-		if (MathUtils.randomBoolean()) {
-			for (TextureRegion region : regions) {
-				region.flip(true, false);
-			}
-		}
+		TextureRegion[] regions = MathUtils.randomBoolean() ? FRAMES_NORMAL : FRAMES_FLIPPED;
 		frames = new Animation<TextureRegion>(ANIMATION_DURATION, regions);
 
 		light = new Light(x + bbWidth / 2f, y + bbHeight / 2f, 0.1f, 0.1f, 0.8f, Color.newTemp(1f, 0.5f, 0f, 1f));
 		Graphics.instance.setLight(light);
+
 		noPhysics = true;
 		sine = MathUtils.randomBoolean();
 		piAmount = sine ? MathUtils.PI : MathUtils.PI2;

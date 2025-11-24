@@ -47,6 +47,7 @@ public class EntityFurniture extends Entity {
 		float x = data.getFloat("xPos");
 		float y = data.getFloat("yPos");
 		String type = data.getString("type", null);
+		float intensity = data.getFloat("intensity", 0.5f);
 
 		switch (name) {
 		case "Table":
@@ -60,7 +61,7 @@ public class EntityFurniture extends Entity {
 		case "Carpet":
 			return new CarpetFurniture(level, x, y, type);
 		case "Lamp":
-			return new LampFurniture(level, x, y);
+			return new LampFurniture(level, x, y, intensity);
 		case "Drawer":
 			return new DrawerFurniture(level, x, y);
 		case "Wardrobe":
