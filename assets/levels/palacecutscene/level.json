@@ -4,7 +4,7 @@
 	"globalLight": 0.3,
 	"canMove": false,
 	"npcs": {
-		"Male": {
+		/*"Male": {
 			"xPos": 21.5,
 			"yPos": 47.5,
 			"xtPos": 21.5,
@@ -29,7 +29,7 @@
 				},
 			},
 			"levelName": "barracks"
-		},
+		},*/
 		"Female": {
 			"type": 2,
 			"xPos": 15.0,
@@ -105,6 +105,10 @@
 		},
 		"Garbage Can": {
 			"xPos": 17.3,
+			"yPos": 51.2,
+		},
+		"Mailbox": {
+			"xPos": 18.5,
 			"yPos": 51.2,
 		}
 	},

@@ -20,18 +20,6 @@
 			"yPos": 16.5,
 			"direction": "vertical"
 		},
-		"Firefly": {
-			"xPos": 17.5,
-			"yPos": 17.0,
-		},
-		"Firefly": {
-			"xPos": 18.5,
-			"yPos": 18.5,
-		},
-		"Firefly": {
-			"xPos": 16.5,
-			"yPos": 18.0,
-		}
 	},
 	"npcs": {
 		"Male": {

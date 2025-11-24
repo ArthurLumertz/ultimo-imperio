@@ -15,7 +15,7 @@ public class Mob extends Entity {
 	public boolean down = false;
 	public boolean left = false;
 	public boolean right = false;
-	protected String direction = "down";
+	public String direction = "down";
 
 	protected float walkDist;
 	protected boolean makeStepSound = true;

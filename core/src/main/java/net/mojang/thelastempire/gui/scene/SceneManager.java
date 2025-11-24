@@ -1,6 +1,5 @@
 package net.mojang.thelastempire.gui.scene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 
 import net.mojang.thelastempire.TheLastEmpire;

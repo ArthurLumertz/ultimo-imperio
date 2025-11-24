@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.mojang.thelastempire.TheLastEmpire;
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.TileSheet;
-import net.mojang.thelastempire.level.entity.player.Player;
 import net.mojang.thelastempire.level.tile.Tile;
 
 public class GuiCredits extends GuiScreen {

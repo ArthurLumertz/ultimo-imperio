@@ -6,10 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.mojang.thelastempire.Pointer;
 import net.mojang.thelastempire.TheLastEmpire;
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.gui.GuiDialogue;
@@ -21,6 +24,8 @@ import net.mojang.thelastempire.level.tile.Tile;
 import net.mojang.thelastempire.level.tile.Tile.SoundType;
 
 public class NPC extends Mob {
+	
+	private static TheLastEmpire theLastEmpire = TheLastEmpire.getTheLastEmpire();
 
 	protected Array<NPCDialogue> dialogues;
 
@@ -55,7 +60,7 @@ public class NPC extends Mob {
 		this.levelName = levelName;
 		this.name = name;
 		this.dialogues = dialogues;
-		this.speed = 0.04f;
+		this.speed = 0.02f;
 		this.xt = xt;
 		this.yt = yt;
 		this.canMove = canMove;
@@ -158,7 +163,7 @@ public class NPC extends Mob {
 				float dx = xt - x;
 				float dy = yt - y;
 				float distance = (float) Math.sqrt(dx * dx + dy * dy);
-				
+
 				float epsilon = 0.01f;
 				if (distance > epsilon) {
 					float nx = dx / distance;
@@ -177,27 +182,32 @@ public class NPC extends Mob {
 						direction = "left";
 					else if (right)
 						direction = "right";
-
-					move(nx * speed, ny * speed);
 				} else {
 					up = false;
 					down = false;
 					left = false;
 					right = false;
-
 					if (dialogues.size > 0) {
 						Player player = level.getPlayer();
 						player.interact(this);
 						startChatting();
 					}
 				}
-			} else {
-				baseTick(xd, yd);
-				xd *= 0.71f;
-				yd *= 0.71f;
 			}
+
+			baseTick(xd, yd);
+			xd *= 0.71f;
+			yd *= 0.71f;
 		}
 
+		updateAnimation();
+
+		if (!chatting && (xt > 0f && yt > 0f)) {
+			advanceAi(false, false);
+		}
+	}
+	
+	public void updateAnimation() {
 		switch (direction) {
 		case "up":
 			currentAnimation = allAnimations[UP_ANIMATION];
@@ -212,18 +222,16 @@ public class NPC extends Mob {
 			currentAnimation = allAnimations[RIGHT_ANIMATION];
 			break;
 		}
-
-		if (!chatting && (xt > 0f && yt > 0f)) {
-			advanceAi(false, false);
-		}
 	}
 
 	protected void advanceAi(boolean force, boolean prev) {
-		if (!canMove) return;
+		if (!canMove)
+			return;
 
 		if (!force) {
 			aiTimer++;
-			if (aiTimer < 40) return;
+			if (aiTimer < 40)
+				return;
 		}
 
 		up = false;
@@ -233,21 +241,45 @@ public class NPC extends Mob {
 
 		if (prev) {
 			switch (direction) {
-			case "up":    down = true; direction = "down"; break;
-			case "down":  up = true;   direction = "up";   break;
-			case "left":  right = true;direction = "right";break;
-			case "right": left = true; direction = "left"; break;
-		}
+			case "up":
+				down = true;
+				direction = "down";
+				break;
+			case "down":
+				up = true;
+				direction = "up";
+				break;
+			case "left":
+				right = true;
+				direction = "right";
+				break;
+			case "right":
+				left = true;
+				direction = "left";
+				break;
+			}
 			aiTimer = 0;
 			return;
 		}
 
 		int dir = MathUtils.random(3);
 		switch (dir) {
-			case 0: up = true;    direction = "up";    break;
-			case 1: down = true;  direction = "down";  break;
-			case 2: left = true;  direction = "left";  break;
-			case 3: right = true; direction = "right"; break;
+		case 0:
+			up = true;
+			direction = "up";
+			break;
+		case 1:
+			down = true;
+			direction = "down";
+			break;
+		case 2:
+			left = true;
+			direction = "left";
+			break;
+		case 3:
+			right = true;
+			direction = "right";
+			break;
 		}
 
 		aiTimer = 0;
@@ -268,9 +300,19 @@ public class NPC extends Mob {
 		}
 
 		Player player = level.getPlayer();
-		if (dialogues.size > 0) {
-			if (Gdx.input.isKeyJustPressed(Input.Keys.E) && player.boundingBox.intersects(boundingBox.grow(0.2f, 0.2f))
-					&& !chatting) {
+
+		if (dialogues.size > 0 && !chatting) {
+			if (!player.boundingBox.intersects(boundingBox.grow(0.3f, 0.3f))) {
+				return;
+			}
+			
+			Vector2 mousePos = theLastEmpire.mousePosition;
+			Rectangle tmpRect = Rectangle.tmp.set(x, y, 1f, 2f);
+			if (tmpRect.contains(mousePos)) {
+				theLastEmpire.setPointer(Pointer.Type.TEXT_SELECT);
+			}
+			
+			if (Gdx.input.isKeyJustPressed(Input.Keys.E) || Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
 				player.interact(this);
 				startChatting();
 			}
@@ -355,6 +397,10 @@ public class NPC extends Mob {
 		return emotion;
 	}
 
+	public boolean hasDialogues() {
+		return dialogues.size > 0;
+	}
+
 	public static NPC createNPC(Level level, JsonValue rawNpc) {
 		String npcType = rawNpc.name();
 		float x = rawNpc.getFloat("xPos", -1);
@@ -378,12 +424,14 @@ public class NPC extends Mob {
 
 		switch (npcType) {
 		case "Male":
-			return new MaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove, skippableDialogue);
+			return new MaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove,
+					skippableDialogue);
 		case "Female":
-			return new FemaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove, skippableDialogue);
+			return new FemaleNPC(level, type, x, y, xt, yt, name, levelName, dialogues, direction, canMove,
+					skippableDialogue);
 		default:
 			throw new RuntimeException("Failed to find NPC: " + npcType + "!");
 		}
 	}
-
+	
 }

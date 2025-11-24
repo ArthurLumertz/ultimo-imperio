@@ -52,7 +52,7 @@ public class Player extends Mob {
 
 	private Light light = null;
 	protected boolean isDashing = false;
-	
+
 	public Player(Level level, float xs, float ys, boolean canMove, String direction) {
 		super(level, 20);
 
@@ -94,7 +94,7 @@ public class Player extends Mob {
 		allAnimations[DOWN_ANIMATION] = new Animation<TextureRegion>(0.3f, downFrames);
 		allAnimations[LEFT_ANIMATION] = new Animation<TextureRegion>(0.3f, leftFrames);
 		allAnimations[RIGHT_ANIMATION] = new Animation<TextureRegion>(0.3f, rightFrames);
-		
+
 		allAnimations[UP_IDLE_ANIMATION] = new Animation<TextureRegion>(0.8f, upIdleFrames);
 		allAnimations[DOWN_IDLE_ANIMATION] = new Animation<TextureRegion>(0.8f, downIdleFrames);
 
@@ -124,23 +124,27 @@ public class Player extends Mob {
 		yd *= 0.71f;
 
 		if (canMove) {
-			switch (direction) {
-			case "up":
-				currentAnimation = up ? allAnimations[UP_ANIMATION] : allAnimations[UP_IDLE_ANIMATION];
-				break;
-			case "down":
-				currentAnimation = down ? allAnimations[DOWN_ANIMATION] : allAnimations[DOWN_IDLE_ANIMATION];
-				break;
-			case "left":
-				currentAnimation = allAnimations[LEFT_ANIMATION];
-				break;
-			case "right":
-				currentAnimation = allAnimations[RIGHT_ANIMATION];
-				break;
-			}
+			updateAnimation();
 		}
 
 		controller.tick();
+	}
+
+	private void updateAnimation() {
+		switch (direction) {
+		case "up":
+			currentAnimation = up ? allAnimations[UP_ANIMATION] : allAnimations[UP_IDLE_ANIMATION];
+			break;
+		case "down":
+			currentAnimation = down ? allAnimations[DOWN_ANIMATION] : allAnimations[DOWN_IDLE_ANIMATION];
+			break;
+		case "left":
+			currentAnimation = allAnimations[LEFT_ANIMATION];
+			break;
+		case "right":
+			currentAnimation = allAnimations[RIGHT_ANIMATION];
+			break;
+		}
 	}
 
 	@Override
@@ -198,6 +202,32 @@ public class Player extends Mob {
 	}
 
 	public void interact(NPC npc) {
+		 Vec2 vPlayerToNPC = Vec2.newTemp(npc.x - x, npc.y - y);
+		    float dist2 = vPlayerToNPC.lengthSquared();
+		    
+		    if (dist2 > 0f) {
+		        vPlayerToNPC.normalize();
+
+		        if (vPlayerToNPC.y > 0.2f) direction = "up";
+		        else if (vPlayerToNPC.y < -0.2f) direction = "down";
+
+		        if (vPlayerToNPC.x > 0.2f) direction = "right";
+		        else if (vPlayerToNPC.x < -0.2f) direction = "left";
+
+		        updateAnimation();
+
+		        Vec2 vNPCToPlayer = Vec2.newTemp(x - npc.x, y - npc.y);
+		        vNPCToPlayer.normalize();
+
+		        if (vNPCToPlayer.y > 0.2f) npc.direction = "up";
+		        else if (vNPCToPlayer.y < -0.2f) npc.direction = "down";
+
+		        if (vNPCToPlayer.x > 0.2f) npc.direction = "right";
+		        else if (vNPCToPlayer.x < -0.2f) npc.direction = "left";
+
+		        npc.updateAnimation();
+		    }
+
 		isChatting = true;
 		up = false;
 		down = false;

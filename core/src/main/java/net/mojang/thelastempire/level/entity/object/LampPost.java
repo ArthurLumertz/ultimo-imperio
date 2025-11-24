@@ -8,6 +8,7 @@ import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.Light;
 import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.level.entity.Entity;
+import net.mojang.thelastempire.level.entity.animal.FireflyEntity;
 
 public class LampPost extends Entity {
 	
@@ -35,6 +36,16 @@ public class LampPost extends Entity {
 			texture = new TextureRegion(Graphics.instance.getFurniture(96, 0, 32, 48));
 		}
 		this.direction = MathUtils.randomBoolean() ? -1 : 1;
+	
+		if (level.getGlobalLight() < 0.5f) {
+			for (int i = 0; i < 2; i++) {
+				float gap = (i + 1) * 1.5f;
+				float rx = MathUtils.random(x - gap, x + gap);
+				float ry = MathUtils.random(y - 0.5f, y + 0.5f) + 2f;
+				FireflyEntity ff = new FireflyEntity(level, rx, ry);
+				level.addEntity(ff);
+			}
+		}
 	}
 	
 	@Override

@@ -25,5 +25,13 @@ public class TileSheet {
 	public void bind() {
 		texture.bind();
 	}
+	
+	public int getWidth() {
+		return texture.getWidth();
+	}
+
+	public int getHeight() {
+		return texture.getHeight();
+	}
 
 }

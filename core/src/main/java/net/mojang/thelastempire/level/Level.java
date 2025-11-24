@@ -13,22 +13,22 @@ import net.mojang.thelastempire.level.tile.Tile;
 
 public class Level {
 
-	private TheLastEmpire tle;
+	private final TheLastEmpire tle;
 
 	private int width;
 	private int height;
 	private byte[] blocks;
 	private byte[] data;
 
-	private Array<AABB> aABBs = new Array<AABB>();
-	private Array<Entity> entities = new Array<Entity>();
+	private Array<AABB> aABBs = new Array<>();
+	private Array<Entity> entities = new Array<>();
 
 	private Player player;
 
 	private LevelParser levelParser = new LevelParser(this);
 	private LevelRenderer levelRenderer;
 
-	private ObjectSet<Mob> visibleMobs = new ObjectSet<Mob>();
+	private ObjectSet<Mob> visibleMobs = new ObjectSet<>();
 	private ObjectSet<Mob> visibleMobsWithPlayer = new ObjectSet<>();
 
 	private float globalLight;

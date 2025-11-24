@@ -1,5 +1,6 @@
 package net.mojang.thelastempire.level.phys;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
 public class AABB {
@@ -125,4 +126,12 @@ public class AABB {
         y1 += ya;
     }
 
+    public boolean contains(float x, float y) {
+        return x >= x0 && x < x1 && y >= y0 && y < y1;
+    }
+    
+    public boolean contains(Vector2 v) {
+        return contains(v.x, v.y);
+    }
+    
 }

@@ -3,24 +3,19 @@ package net.mojang.thelastempire;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import net.mojang.thelastempire.engine.AudioManager;
 import net.mojang.thelastempire.engine.Graphics;
 import net.mojang.thelastempire.engine.Resources;
-import net.mojang.thelastempire.gui.GuiCredits;
+import net.mojang.thelastempire.engine.TileSheet;
 import net.mojang.thelastempire.gui.GuiScreen;
 import net.mojang.thelastempire.gui.scene.SceneManager;
 import net.mojang.thelastempire.level.Level;
 import net.mojang.thelastempire.level.LevelRenderer;
 
 public class TheLastEmpire extends Game {
-
-	private static TextureRegion backdropTexture;
 
 	private static TheLastEmpire tle = new TheLastEmpire();
 
@@ -32,17 +27,17 @@ public class TheLastEmpire extends Game {
 	private SceneManager sceneManager;
 	private AudioManager audioManager;
 
-	private int timer = 0;
-	private int oldTimer = 0;
+	private Pointer pointer;
 
 	private boolean debug = false;
+
+	public final Vector2 mousePosition = new Vector2();
 
 	@Override
 	public void create() {
 		Resources.loadResources();
-		backdropTexture = new TextureRegion(Resources.getTexture("dialogue"), 0, 64, 48, 32);
 
-		Gdx.graphics.setSystemCursor(Cursor.SystemCursor.None);
+		pointer = new Pointer(new TileSheet("cursor"), this);
 
 		sceneManager = new SceneManager(this);
 		audioManager = new AudioManager();
@@ -50,15 +45,14 @@ public class TheLastEmpire extends Game {
 		String[] mapsInOrder = { "palace", "palacecutscene", "level0" };
 
 		setGuiScreen(null, false);
-		load(mapsInOrder[0]);
+		load(mapsInOrder[1]);
 	}
 
 	@Override
 	public void tick() {
 		sceneManager.tick();
 
-		oldTimer = timer;
-		timer++;
+		pointer.tick();
 
 		if (!isInGame()) {
 			return;
@@ -79,6 +73,7 @@ public class TheLastEmpire extends Game {
 		if (hasLoaded) {
 			Graphics g = Graphics.instance;
 			g.begin();
+			mousePosition.set(g.unproject(Gdx.input.getX(), Gdx.input.getY()));
 			levelRenderer.draw(g);
 			g.end();
 		}
@@ -92,17 +87,7 @@ public class TheLastEmpire extends Game {
 		}
 
 		sceneManager.draw(g);
-
-		Vector2 mouseCoords = g.unproject(Gdx.input.getX(), Gdx.input.getY());
-		float a = oldTimer + (timer - oldTimer) * TheLastEmpire.a;
-		float scalar = 0.9f + ((1f + MathUtils.cos(a * 0.2f)) / 2f) * 0.2f;
-		float rs = 48f;
-		float xs = rs * scalar;
-		float ys = xs;
-		float rx = mouseCoords.x + rs / 2f;
-		float ry = mouseCoords.y - rs / 2f;
-		g.drawTexture(Resources.getTexture("cursor"), rx - xs / 2f, ry - ys / 2f, xs, ys);
-
+		pointer.draw(g);
 		g.end();
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
@@ -113,6 +98,7 @@ public class TheLastEmpire extends Game {
 			level.reloadLevel();
 		}
 
+		pointer.setPointer(Pointer.Type.DEFAULT);
 		super.render();
 	}
 
@@ -177,6 +163,14 @@ public class TheLastEmpire extends Game {
 
 	public Level getLevel() {
 		return level;
+	}
+
+	public LevelRenderer getLevelRenderer() {
+		return levelRenderer;
+	}
+
+	public void setPointer(int type) {
+		pointer.setPointer(type);
 	}
 
 }

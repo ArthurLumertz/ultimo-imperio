@@ -54,6 +54,8 @@ public class Decoration extends Entity {
 			return new FlowerDecoration(level, xPos, yPos, type);
 		case "Garbage Can":
 			return new GarbageCanDecoration(level, xPos, yPos);
+		case "Mailbox":
+			return new MailboxDecoration(level, xPos, yPos);
 		}
 		return null;
 	}

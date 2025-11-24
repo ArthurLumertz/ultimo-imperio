@@ -34,9 +34,18 @@ public class FireflyEntity extends Entity {
 		setPos(x, y);
 		setSize(0.5f, 0.5f);
 
-		frames = new Animation<TextureRegion>(ANIMATION_DURATION, new TextureRegion[] {
-				new TextureRegion(texture, 0, 0, 8, 8), new TextureRegion(texture, 8, 0, 8, 8), });
-		light = new Light(x + bbWidth / 2f, y + bbHeight / 2f, 0.1f, 0.1f, 0.8f, new Color(1f, 0.5f, 0f, 1f));
+		TextureRegion[] regions = new TextureRegion[] {
+				new TextureRegion(texture, 0, 0, 8, 8),
+				new TextureRegion(texture, 8, 0, 8, 8)
+		};
+		if (MathUtils.randomBoolean()) {
+			for (TextureRegion region : regions) {
+				region.flip(true, false);
+			}
+		}
+		frames = new Animation<TextureRegion>(ANIMATION_DURATION, regions);
+
+		light = new Light(x + bbWidth / 2f, y + bbHeight / 2f, 0.1f, 0.1f, 0.8f, Color.newTemp(1f, 0.5f, 0f, 1f));
 		Graphics.instance.setLight(light);
 		noPhysics = true;
 		sine = MathUtils.randomBoolean();
