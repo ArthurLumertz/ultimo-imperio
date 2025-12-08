@@ -28,6 +28,7 @@ public class GuiCredits extends GuiScreen {
 		yScroll = -(48 * 10);
 		yOldScroll = yScroll;
 		playerSheet = new TileSheet("char");
+        Gdx.input.setCursorCatched(false);
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class GuiCredits extends GuiScreen {
 	@Override
 	public void draw(Graphics g) {
 		float yy = yOldScroll + (yScroll - yOldScroll) * TheLastEmpire.a;
-		
+
 		drawTiledBackground(g, Tile.stone, yy);
 
 		g.setFontSize(20f);

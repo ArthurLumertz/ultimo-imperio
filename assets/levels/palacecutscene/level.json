@@ -11,10 +11,10 @@
 			"ytPos": 49.5,
 			"dialogues": {
 				"0": "Bom noite senhor, eu fiquei sabendo que\nDom Pedro será deposto.",
-				
+
 				"1": {
 					"text": "Você pode me dizer se\nessa informação é verídica?",
-					"options": {						
+					"options": {
 						"Falar a verdade": {
 							"dialogue": "Sim, nós no exército já estamos\ntrabalhando para que isso seja\nrealizado o quanto antes.",
 							"response": "Que ótima notícia, senhor!\nSaiba que o povo apoia o\nseu julgamento veementemente!",
@@ -22,7 +22,7 @@
 						},
 						"Mentir": {
 							"dialogue": "Não, eu jamais faria isso com nosso\namado governante, volte para o buraco\nde onde você veio, seu traidor imundo!",
-							"response": "Eu já devia saber... vocês no poder\nsão todos iguais: gananciosos, venderiam\no povo por trocados. Tomara que morra servindo \nseu \"governante\", sua escória.",
+							"response": "Eu já devia saber... vocês no poder\nsão todos iguais: gananciosos, venderiam\no povo por trocados. Tomara que morra\nservindo seu \"governante\",\nsua escória.",
 							"emotionChange": "angry"
 						}
 					}
@@ -66,12 +66,12 @@
 		"Plant": {
 			"xPos": 17.3,
 			"yPos": 52.9,
-			"stage": "mid",	
+			"stage": "mid",
 		},
 		"Plant": {
 			"xPos": 18.2,
 			"yPos": 53.2,
-			"stage": "early",	
+			"stage": "early",
 		},
 		"Flower": {
 			"type": 0,
@@ -96,12 +96,12 @@
 		"Plant": {
 			"xPos": 30.2,
 			"yPos": 52.9,
-			"stage": "mid",	
+			"stage": "mid",
 		},
 		"Plant": {
 			"xPos": 31.2,
 			"yPos": 53.2,
-			"stage": "early",	
+			"stage": "early",
 		},
 		"Garbage Can": {
 			"xPos": 17.3,

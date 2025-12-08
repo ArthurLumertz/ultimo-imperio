@@ -1,7 +1,5 @@
 package net.mojang.thelastempire.level.entity.object.furniture;
 
-import java.util.Objects;
-
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -51,10 +49,10 @@ public class EntityFurniture extends Entity {
 
 		switch (name) {
 		case "Table":
-			type = Objects.requireNonNullElse(type, "default");
+			type = type == null ? "default" : type;
 			return new TableFurniture(level, x, y, type);
 		case "Desk":
-			type = Objects.requireNonNullElse(type, "medium");
+			type = type == null ? "medium" : type;
 			return new DeskFurniture(level, x, y, type);
 		case "Bed":
 			return new BedFurniture(level, x, y);
@@ -70,9 +68,9 @@ public class EntityFurniture extends Entity {
 			return new BookshelfFurniture(level, x, y);
 		case "Fireplace":
 			return new FireplaceFurniture(level, x, y);
-        case "Chair":
-            type = Objects.requireNonNullElse(type, "south");
-            return new ChairFurniture(level, x, y, type);
+		case "Chair":
+			type = type == null ? "south" : type;
+			return new ChairFurniture(level, x, y, type);
 		default:
 			throw new RuntimeException("Failed to find entity: " + name);
 		}

@@ -80,6 +80,10 @@ public class Level {
 		loadLevel(levelParser.getCurrentLevel(), false, false, "");
 	}
 
+    public String getLevelName() {
+        return levelParser.getCurrentLevel();
+    }
+
 	public void addEntity(Entity entity) {
 		if ("Player".equals(entity.getName())) {
 			player = (Player) entity;

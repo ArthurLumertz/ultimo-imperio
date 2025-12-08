@@ -11,14 +11,8 @@
 			"type": 0,
 			"skippableDialogue": true,
 			"dialogues": {
-				"0": "Bom dia, senhor. Precisa de algo? Acabei de tirar\no pão do forno.",
-				"1": "Desde que começaram a falar de República, meu marido\nnão dorme direito...",
-				"2": "As roupas não secam com essa chuva. Vai ver até\no céu tá triste com o que vem aí.",
-				"3": "Falam que o Imperador está velho... Mas será que a\nRepública vai por comida na nossa mesa?",
-				"4": "Me disseram que os soldados marcharam pela rua\nhoje cedo. Será que vai ter guerra?",
-				"5": "Eu só queria que meus filhos tivessem uma vida\ntranquila... Mas o mundo anda tão agitado.",
-				"6": "Minha avó dizia que quando o galo canta sem parar,\nalgo grande está pra acontecer.",
-				"7": "Não confio nesses políticos da capital. Pelo menos\nDom Pedro sempre manteve a ordem."
+				"0": "Bom dia!",
+				"1": "Aparenta que dormiu bem hoje."
 			}
 		}
 	},

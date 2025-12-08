@@ -40,11 +40,10 @@ public class DomPedroII extends Boss {
 	}
 	
 	private void createDialogues() {
-		Array<String> dialogues = new Array<String>();
-		dialogues.add("Ah, Deodoro, um dia você já foi um de meus melhores\namigos, e agora está corrompido pela ideia de comandar\num país, sacrificando a nossa amizade para isso.");
-		dialogues.add("A sala do trono nunca foi destinada ao sangue,\nmas hoje, a honra do Império exige que eu\nempunhe esta arma.");
-		dialogues.add("Marechal, você irá pagar pela decisão que tomou.\nAgora, prepare-se.");
-
+		Array<String> dialogues = new Array<>();
+		dialogues.add("Ah, Deodoro, um dia você já foi um de\nmeus melhores amigos, e agora está\ncorrompido pela ideia de comandar um\npaís, sacrificando a nossa amizade\npara isso.");
+		dialogues.add("A sala do trono nunca foi destinada ao\nsangue, mas hoje, a honra do Império\nexige que eu empunhe esta arma.");
+		dialogues.add("Marechal, você irá pagar pela decisão\nque tomou.\nAgora, prepare-se.");
 		TheLastEmpire.getTheLastEmpire().setGuiScreen(new GuiDialogue(dialogues, "dompedro", this::onDialogueFinish, level), false);
 	}
 	

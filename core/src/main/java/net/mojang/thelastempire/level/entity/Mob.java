@@ -29,7 +29,7 @@ public class Mob extends Entity {
 		this.baseHealth = health;
 		this.health = health;
 	}
-	
+
 	protected void baseTick(float xa, float ya) {
 		xo = x;
 		yo = y;
@@ -57,7 +57,7 @@ public class Mob extends Entity {
 		move(xd, yd);
 		moveRelative(xa, ya, speed);
 	}
-	
+
 	@Override
 	public void move(float xa, float ya) {
 		super.move(xa, ya);
@@ -86,8 +86,10 @@ public class Mob extends Entity {
 
 	public void onAttack(Player player, int amount) {
 		for (int i = 0; i < 4; i++) {
-			EntityBloodFX bloodFX = new EntityBloodFX(level, x, y);
-			level.addEntity(bloodFX);
+			float xt = MathUtils.random(x - 0.2f, x + 0.2f);
+			float yt = MathUtils.random(y + 0.6f, y + 1f);
+			EntityBloodFX bloodFx = new EntityBloodFX(level, xt, yt);
+			level.addEntity(bloodFx);
 		}
 		damage(amount);
 	}
@@ -96,7 +98,7 @@ public class Mob extends Entity {
 		if (health > 0) {
 			health--;
 		} else {
-			remove();	
+			remove();
 		}
 	}
 
@@ -107,9 +109,9 @@ public class Mob extends Entity {
 	public int getHealth() {
 		return health;
 	}
-	
+
 	public String getDirection() {
 		return direction;
 	}
-	
+
 }

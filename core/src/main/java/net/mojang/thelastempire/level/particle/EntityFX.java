@@ -27,7 +27,9 @@ public class EntityFX extends Entity {
 		this.yd = yd;
 		xo = x;
 		yo = y;
-		animation = new Animation<TextureRegion>(fd, frames);
+		if (frames != null) {
+			animation = new Animation<TextureRegion>(fd, frames);
+		}
 		noPhysics = true;
 		speed = 0.2f;
 		boundingBox = AABB.newPermanent(x, y, x + bbWidth, y + bbHeight);
@@ -51,9 +53,14 @@ public class EntityFX extends Entity {
 
 		timer++;
 		if (timer > lifespan) {
-			if (shouldRemove) {
-				remove();
-			}
+			remove();
+		}
+	}
+
+	@Override
+	public void remove() {
+		if (shouldRemove) {
+			super.remove();
 		}
 	}
 
@@ -63,7 +70,7 @@ public class EntityFX extends Entity {
 
 		TextureRegion texture = animation.getKeyFrame(elapsedTime, true);
 		if (shouldAnimate) {
-			elapsedTime += Gdx.graphics.getDeltaTime();			
+			elapsedTime += Gdx.graphics.getDeltaTime();
 		}
 
 		float col = 1f - (timer / (float) lifespan);
@@ -85,7 +92,7 @@ public class EntityFX extends Entity {
 
 	@Override
 	public String getName() {
-		return "Entity FX";
+		return "EntityFX";
 	}
 
 }

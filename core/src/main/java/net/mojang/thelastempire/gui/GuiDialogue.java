@@ -64,6 +64,8 @@ public class GuiDialogue extends GuiScreen {
 
 	private float animationTimer;
 
+    private final String levelName;
+
 	public GuiDialogue(Array<NPCDialogue> dialogues, NPC npc, Runnable onDialogueFinish, Level level,
 			boolean isSkippable) {
 		this.level = level;
@@ -73,6 +75,7 @@ public class GuiDialogue extends GuiScreen {
 		this.playerTexture = new TextureRegion(Resources.getTexture("char"), 0, 0, 16, 14);
 		this.onDialogueFinish = onDialogueFinish;
 		this.isSkippable = isSkippable;
+        this.levelName = TheLastEmpire.getTheLastEmpire().getLevel().getLevelName();
 	}
 
 	public GuiDialogue(Player player, Runnable onDialogueFinish, Level level) {
@@ -80,6 +83,7 @@ public class GuiDialogue extends GuiScreen {
 		this.dialogues2 = player.getDialogues();
 		this.playerTexture = new TextureRegion(player.getTexture(), 0, 0, 16, 14);
 		this.onDialogueFinish = onDialogueFinish;
+        this.levelName = TheLastEmpire.getTheLastEmpire().getLevel().getLevelName();
 	}
 
 	public GuiDialogue(Array<String> dialogues, String textureName, Runnable onDialogueFinish, Level level) {
@@ -87,6 +91,7 @@ public class GuiDialogue extends GuiScreen {
 		this.dialogues2 = dialogues;
 		this.playerTexture = new TextureRegion(Resources.getTexture(textureName), 0, 0, 16, 14);
 		this.onDialogueFinish = onDialogueFinish;
+        this.levelName = TheLastEmpire.getTheLastEmpire().getLevel().getLevelName();
 	}
 
 	@Override
@@ -213,6 +218,9 @@ public class GuiDialogue extends GuiScreen {
 		float y = yy + h - g.getFontSize() * 1.75f;
 
 		String name = npc != null ? npc.getName() : "Você";
+		if ("bossfight".equals(levelName)) {
+			name = "Dom Pedro II";
+		}
 		g.drawString(name, x, y, 0xFFFFFF);
 
 		x = xx + width * 0.4f;

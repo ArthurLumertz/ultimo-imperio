@@ -16,10 +16,10 @@ import net.mojang.thelastempire.math.Vec2;
 
 public class PlayerController extends InputAdapter {
 
+	private static TheLastEmpire theLastEmpire = TheLastEmpire.getTheLastEmpire();
+	
 	private final Player player;
 	private final Level level;
-
-	private final Vec2 mousePos = Vec2.newPermanent(0, 0);
 
 	private int attackTimer;
 	private static final int ATTACK_INTERVAL = 10;
@@ -39,8 +39,6 @@ public class PlayerController extends InputAdapter {
 	}
 
 	public void tick() {
-		mousePos.set(Graphics.instance.unproject(Gdx.input.getX(), Gdx.input.getY()));
-
 		if (dashCooldown > 0) {
 			dashCooldown--;
 		}
@@ -85,7 +83,7 @@ public class PlayerController extends InputAdapter {
 		for (Mob mob : level.getVisibleMobs(false)) {
 			if (selectedItem.usesHandCombat()) {
 				if (Vec2.distance(player.getDrawPosition(), mob.getDrawPosition()) < 3f
-						&& mousePos.contains(Rectangle.tmp.set(mob.x, mob.y, 1f, 2f))) {
+						&& Rectangle.tmp.set(mob.x, mob.y, 1f, 2f).contains(theLastEmpire.mousePosition)) {
 					attackMob(mob, selectedItem);
 				}
 			} else {
@@ -95,7 +93,7 @@ public class PlayerController extends InputAdapter {
 				} else {
 					if (!reloading) {
 						reloading = true;
-						TheLastEmpire.getTheLastEmpire().playSound("reload", 1f, 1f);
+						theLastEmpire.playSound("reload", 1f, 1f);
 					}
 				}
 			}
@@ -132,7 +130,7 @@ public class PlayerController extends InputAdapter {
 				level.addEntity(dashFX);
 			}
 
-			TheLastEmpire.getTheLastEmpire().playSound("dodge", 1f, MathUtils.random(0.8f, 1.2f));
+			theLastEmpire.playSound("dodge", 1f, MathUtils.random(0.8f, 1.2f));
 			dashCooldown = 15;
 			player.isDashing = true;
 			player.stopMoving();

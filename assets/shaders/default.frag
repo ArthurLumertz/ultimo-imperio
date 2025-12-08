@@ -1,4 +1,4 @@
-#version 120
+precision mediump float;
 
 varying vec4 v_color;
 varying vec2 v_texCoord;
@@ -25,8 +25,8 @@ uniform int u_numLights;
 vec4 computeLights(vec2 fragPos) {
     vec4 totalLight = vec4(0.0);
 
-    for (int i = 0; i < u_numLights; i++) {
-
+	for (int i = 0; i < MAX_LIGHTS; i++) {
+		if (i >= u_numLights) break;
         PointLight light = u_pointLights[i];
 
         float dist = distance(fragPos, light.position);

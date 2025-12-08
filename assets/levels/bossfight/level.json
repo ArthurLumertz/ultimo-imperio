@@ -6,13 +6,13 @@
 		"Dom Pedro II": {
 			"xPos": 16.0,
 			"yPos": 25.0,
-			"health": 50
+			"health": 100
 		}
 	},
 	"items": [
 		"Fist",
 		"Pistol",
-		"Long Sword",
+		"Long Sword"
 	],
 	"decorations": {
 		"Skull": {

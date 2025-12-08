@@ -64,6 +64,10 @@ public class BulletEntity extends Entity {
 			Rectangle thisRectangle = Rectangle.tmp2.set(x, y, bbWidth, bbHeight);
 			if (thisRectangle.overlaps(mobRectangle)) {
 				mob.onAttack(level.getPlayer(), 1);
+				
+				float s = 0.15f;
+				mob.applyForce(xd * s, yd * s);
+				
 				remove();
 				break;
 			}

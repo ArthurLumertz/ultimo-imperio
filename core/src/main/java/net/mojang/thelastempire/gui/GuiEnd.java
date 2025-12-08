@@ -14,7 +14,7 @@ public class GuiEnd extends GuiMenu {
 		String[] texts = { "*Som de tambores ao fundo*", "Narrador: 15 de novembro de 1889.",
 				"Narrador: Marechal Deodoro da Fonseca ergue a nova bandeira da República.",
 				"*Multidão aplaude e grita*", "Multidão: Viva a República! Viva o Brasil!",
-				"Narrador: Nasce uma nova era. O Império chega ao fim.", "Muito obrigado!" };
+				"Narrador: Nasce uma nova era. O Império chega ao fim." };
 
 		textWriter = new TextWriter(texts, 1, 80, this::onFinish);
 		Gdx.input.setCursorCatched(true);
@@ -35,7 +35,7 @@ public class GuiEnd extends GuiMenu {
 	}
 
 	private void onFinish() {
-
+        theLastEmpire.setGuiScreen(new GuiCredits(), true);
 	}
 
 }

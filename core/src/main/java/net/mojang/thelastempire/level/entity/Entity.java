@@ -120,6 +120,12 @@ public class Entity {
 		removed = true;
 	}
 
+
+	public void applyForce(float xa, float ya) {
+		xd += xa;
+		yd += ya;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)

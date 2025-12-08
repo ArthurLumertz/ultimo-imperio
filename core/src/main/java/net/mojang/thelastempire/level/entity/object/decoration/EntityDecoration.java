@@ -57,7 +57,7 @@ public class EntityDecoration extends Entity {
 		case "Mailbox":
 			return new MailboxDecoration(level, xPos, yPos);
 		}
-		return null;
+		throw new IllegalStateException("Failed to create decoration");
 	}
 
 }

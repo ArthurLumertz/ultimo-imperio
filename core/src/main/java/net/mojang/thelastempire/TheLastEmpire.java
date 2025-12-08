@@ -43,10 +43,7 @@ public class TheLastEmpire extends Game {
 		sceneManager = new SceneManager(this);
 		audioManager = new AudioManager();
 
-		String[] mapsInOrder = { "palace", "palacecutscene", "barracks", "barracks2" };
-
 		setGuiScreen(new GuiMainMenu(), false);
-//		load("palace");
 	}
 
 	@Override
@@ -91,6 +88,7 @@ public class TheLastEmpire extends Game {
 
 		sceneManager.draw(g);
 		pointer.draw(g);
+
 		g.end();
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
